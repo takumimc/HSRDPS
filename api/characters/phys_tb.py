@@ -1,26 +1,34 @@
 from characters.base_char import BaseCharacter
 class PhysTb(BaseCharacter):
     def auto(self):
+        lvl = self.auto_lvl
+        if lvl > 9:
+            lvl = 9
+        mod = (.5 + (.1 * (lvl - 1)))
         action = {
-            'dmg' : self.atk * .6,
-            'target': 1
+            'dmg' : [self.atk * mod],
+            'target': 'single'
         }
         return action
 
     def skill(self):
         action = {
-            'dmg' : 0,
-            'target': 3
+            'dmg' : [self.atk * 1.25],
+            'target': 'blast'
         }
         return action
 
     def ult(self,target):
-        action = {
-            'dmg' : 0
-        }
-        if target == 1:
-            action['target'] = 1
-        elif target == 3:
-            action['target'] = 3
+
+        if target == 'single':
+            action = {
+                'dmg' : [self.atk * 4.5],
+                'target' : target
+            }
+        elif target == 'blast':
+            action = {
+                'dmg' : [self.atk * 2.7, self.atk *1.62],
+                'target' : target
+            }
 
         return action

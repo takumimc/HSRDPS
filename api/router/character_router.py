@@ -22,11 +22,10 @@ def get_character_data(char: str,
                        queries: CharacterQueries = Depends()):
     data = queries.import_character(char)
     char_obj = PhysTb(char)
-    print(char_obj.get_character(),
-    char_obj.get_stats(),
-    char_obj.get_percents(),
-    char_obj.skill_levels())
     print(char_obj.auto())
+    print(char_obj.skill())
+    print(char_obj.ult('single'))
+    print(char_obj.ult('blast'))
     if data is None:
         response.status_code = 404
     else:
