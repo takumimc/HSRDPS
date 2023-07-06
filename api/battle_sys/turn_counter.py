@@ -7,6 +7,8 @@ class TurnCount:
         self.turn_list = []
         self.character_list = character_list
         self.base_AV_dict = {}
+        self.cycle = 0
+        self.current_cycle_AV = 0
         AV_dict = {}
 
         for char in character_list:
@@ -61,6 +63,18 @@ class TurnCount:
             lowest_char = None
             lowest_AV = 10000000
 
+    def update_cycle(self,AV):
+        if self.cycle == 0:
+            self.current_cycle_AV = self.current_cycle_AV + AV
+            if self.current_cycle_AV >= 150:
+                self.cycle += 1
+                self.current_cycle_AV = self.current_cycle_AV - 150
+        elif self.cycle > 0:
+            self.current_cycle_AV = self.current_cycle_AV + AV
+            while self.current_cycle_AV >= 100:
+                self.cycle += 1
+                self.current_cycle_AV = self.current_cycle_AV - 100
+
     def current_character(self):
         return self.turn_list[0]
 
@@ -71,7 +85,7 @@ class TurnCount:
         for k,v in first.items():
             AV_consumption = v
             current_character = k
-
+        self.update_cycle(AV_consumption)
         self.turn_list.pop(0)
         for char in self.turn_list:
             for k,v in char.items():
@@ -84,10 +98,10 @@ class TurnCount:
 
 
 # cr_list = [
-#         {'char1': 270},
-#         {'char2': 100},
-#         {'char3': 120},
-#         {'char4': 140}
+#         {'char1': 140},
+#         {'char2': 103},
+#         {'char3': 111},
+#         {'char4': 105}
 #        ]
 
 # test = TurnCount(cr_list)
@@ -97,6 +111,37 @@ class TurnCount:
 # print('turn taken: ',test.next_turn())
 # print('turn taken: ',test.next_turn())
 # print('turn taken: ',test.next_turn())
+# print('current cycle: ', test.cycle)
+# print('current cycle AV: ', test.current_cycle_AV)
+# print('turn taken: ',test.next_turn())
+# print('current cycle: ', test.cycle)
+# print('current cycle AV: ', test.current_cycle_AV)
+# print('turn taken: ',test.next_turn())
+# print('current cycle: ', test.cycle)
+# print('current cycle AV: ', test.current_cycle_AV)
+# print('turn taken: ',test.next_turn())
+# print('turn taken: ',test.next_turn())
+# print('current cycle: ', test.cycle)
+# print('current cycle AV: ', test.current_cycle_AV)
+# print('turn taken: ',test.next_turn())
+# print('current cycle: ', test.cycle)
+# print('current cycle AV: ', test.current_cycle_AV)
+# print('turn taken: ',test.next_turn())
+# print('current cycle: ', test.cycle)
+# print('current cycle AV: ', test.current_cycle_AV)
+# print('turn taken: ',test.next_turn())
+# print('turn taken: ',test.next_turn())
+# print('current cycle: ', test.cycle)
+# print('current cycle AV: ', test.current_cycle_AV)
+# print('turn taken: ',test.next_turn())
+# print('turn taken: ',test.next_turn())
+# print('current cycle: ', test.cycle)
+# print('current cycle AV: ', test.current_cycle_AV)
+# print('turn taken: ',test.next_turn())
+# print('turn taken: ',test.next_turn())
+# print('current cycle: ', test.cycle)
+# print('current cycle AV: ', test.current_cycle_AV)
+
 # print('turn taken: ',test.next_turn())
 # print('turn taken: ',test.next_turn())
 # print('current character taking action:',test.current_character())
