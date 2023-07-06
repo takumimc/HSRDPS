@@ -9,7 +9,7 @@ class TurnCount:
         self.base_AV_dict = {}
         AV_dict = {}
 
-        for char in char_list:
+        for char in character_list:
             for k,v in char.items():
                 AV_dict[k] = 10000/v
 
@@ -83,14 +83,14 @@ class TurnCount:
         return self.turn_list
 
 
-# char_list = [
+# cr_list = [
 #         {'char1': 270},
 #         {'char2': 100},
 #         {'char3': 120},
 #         {'char4': 140}
 #        ]
 
-# test = TurnCount(char_list)
+# test = TurnCount(cr_list)
 # print('Current turn order: ',test.turn_list)
 # print('Current character: ',test.current_character())
 # print('turn taken: ',test.next_turn())
