@@ -42,7 +42,7 @@ class TurnCount:
         for char in self.turn_list:
             for k,v in char.items():
                 AV_dict[k] = v
-        # print('dict made')
+
         self.turn_list = []
         lowest_AV = 10000000
         lowest_char = None
@@ -56,7 +56,7 @@ class TurnCount:
                 lowest_AV = int(lowest_AV + 1)
 
             self.turn_list.append({lowest_char:int(lowest_AV)})
-            # print('turn list updated:',self.turn_list)
+
             AV_dict.pop(lowest_char)
             lowest_char = None
             lowest_AV = 10000000
@@ -77,30 +77,28 @@ class TurnCount:
             for k,v in char.items():
                 char[k] = v - AV_consumption
 
-        # print(current_character, AV_consumption)
-        # print(self.turn_list)
         base_AV = self.base_AV_dict[current_character]
         self.turn_list.append({current_character:base_AV})
         self.set_turn_order()
         return self.turn_list
 
 
-char_list = [
-        {'char1': 270},
-        {'char2': 100},
-        {'char3': 120},
-        {'char4': 140}
-       ]
+# char_list = [
+#         {'char1': 270},
+#         {'char2': 100},
+#         {'char3': 120},
+#         {'char4': 140}
+#        ]
 
-test = TurnCount(char_list)
-print('Current turn order: ',test.turn_list)
+# test = TurnCount(char_list)
+# print('Current turn order: ',test.turn_list)
 # print('Current character: ',test.current_character())
-print('turn taken: ',test.next_turn())
-print('turn taken: ',test.next_turn())
-print('turn taken: ',test.next_turn())
-print('turn taken: ',test.next_turn())
-print('turn taken: ',test.next_turn())
-print('turn taken: ',test.next_turn())
+# print('turn taken: ',test.next_turn())
+# print('turn taken: ',test.next_turn())
+# print('turn taken: ',test.next_turn())
+# print('turn taken: ',test.next_turn())
+# print('turn taken: ',test.next_turn())
+# print('turn taken: ',test.next_turn())
 # print('current character taking action:',test.current_character())
 
 
