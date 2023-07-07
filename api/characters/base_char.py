@@ -5,6 +5,7 @@ class BaseCharacter(CharacterQueries):
         data = self.import_character(character)
         # print('class data',data)
         self.character = data['character']
+        self.unit_type = 'player'
         self.element = data['element']
         self.hp = data['base_hp']
         self.atk = data['base_atk']
@@ -27,6 +28,14 @@ class BaseCharacter(CharacterQueries):
         self.auto_lvl = data['auto_lvl']
         self.skill_lvl = data['skill_lvl']
         self.ult_lvl = data['ult_lvl']
+
+    def increase_en(self,en_value):
+        self.cur_en = self.cur_en + (en_value * (1 + self.en_reg))
+        if self.cur_en > self.max_en:
+            self.cur_en = self.max_en
+
+    def get_turn_info(self):
+        return {self.character : self.spd}
 
     def get_character(self):
         character = {

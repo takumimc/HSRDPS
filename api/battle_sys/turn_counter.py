@@ -6,17 +6,22 @@ class TurnCount:
 
         self.turn_list = []
         self.character_list = character_list
+        self.character_speed_list = []
         self.base_AV_dict = {}
-        self.cycle = 0
+        self.cycle = 1
         self.current_cycle_AV = 0
-        AV_dict = {}
 
         for char in character_list:
+            self.character_speed_list.append(char.get_turn_info())
+
+        AV_dict = {}
+        for char in self.character_speed_list:
             for k,v in char.items():
                 AV_dict[k] = 10000/v
 
         #cleaning up base AV dict values
         self.base_AV_dict = AV_dict.copy()
+        #rounding up
         for k,v in self.base_AV_dict.items():
             if v.is_integer() == False:
                 new_v = int(v + 1)
@@ -64,19 +69,20 @@ class TurnCount:
             lowest_AV = 10000000
 
     def update_cycle(self,AV):
-        if self.cycle == 0:
+        if self.cycle == 1:
             self.current_cycle_AV = self.current_cycle_AV + AV
             if self.current_cycle_AV >= 150:
                 self.cycle += 1
                 self.current_cycle_AV = self.current_cycle_AV - 150
-        elif self.cycle > 0:
+        elif self.cycle > 1:
             self.current_cycle_AV = self.current_cycle_AV + AV
             while self.current_cycle_AV >= 100:
                 self.cycle += 1
                 self.current_cycle_AV = self.current_cycle_AV - 100
 
     def current_character(self):
-        return self.turn_list[0]
+        for k,v in self.turn_list[0].items():
+            return k
 
     def next_turn(self):
         first = self.turn_list[0]
