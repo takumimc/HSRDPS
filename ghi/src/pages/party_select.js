@@ -1,7 +1,7 @@
 import enemies from "../characters/enemy_index.mjs";
 import characters from "../characters/party_index.mjs";
-import { useState, useContext } from "react";
-import UnitContext from "../utils/UnitsContext";
+import { useContext } from "react";
+import { UnitContext } from "../utils/UnitsContext";
 import { useNavigate } from "react-router-dom";
 
 const PartySelect = () =>{

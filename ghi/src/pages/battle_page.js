@@ -1,6 +1,6 @@
 
 import BattleSystem from "../battle_sys/battle.mjs";
-import UnitContext from "../utils/UnitsContext";
+import { UnitContext } from "../utils/UnitsContext";
 import { useContext } from "react";
 
 const Battle = () => {
