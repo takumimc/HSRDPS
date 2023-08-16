@@ -1,6 +1,15 @@
 import BaseCharacter from "./base_char.mjs"
 
 class PhysTb extends BaseCharacter {
+    constructor(data){
+        super(data)
+        this.action_list = [
+            ['auto','single','Auto'],
+            ['skill','blast','Skill'],
+            ['ult','single','Single Target Ult'],
+            ['ult','blast','AOE Ult'],
+        ]
+    }
     auto(){
         const lvl = this.auto_lvl
         this.increase_en(20)

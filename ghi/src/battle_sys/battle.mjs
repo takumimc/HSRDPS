@@ -19,6 +19,7 @@ class BattleSystem{
             select_character = unit
         }
     }
+
     let target = null
     for(let unit of this.all_units){
         if(unit.character === action['target']){
@@ -54,7 +55,6 @@ class BattleSystem{
             skill_multi = char_action['dmg']
         }
 
-    console.log(skill_multi)
     let outgoing_dmg = {}
     for(let dmg of skill_multi){
 
@@ -89,7 +89,7 @@ class BattleSystem{
 
         let tough_multi = .9
         let dmg_calc = base_dmg * crit_dmg * dmg_boost_multi * def_multi * res_multi * vuln_multi * tough_multi
-        console.log(dmg_calc)
+
         outgoing_dmg[target.character] = dmg_calc
     }
     return outgoing_dmg
