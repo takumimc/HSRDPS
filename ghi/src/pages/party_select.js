@@ -1,10 +1,14 @@
 import enemies from "../characters/enemy_index.mjs";
 import characters from "../characters/party_index.mjs";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import UnitContext from "../utils/UnitsContext";
+import { useNavigate } from "react-router-dom";
 
 const PartySelect = () =>{
-    const [party, setParty] = useState([])
-    const [enemy, setEnemy] = useState([])
+    const nav = useNavigate()
+
+    const {party, setParty} = useContext(UnitContext)
+    const {enemy, setEnemy} = useContext(UnitContext)
 
     const showCharacters = () => {
         console.log('clicked')
@@ -29,9 +33,8 @@ const PartySelect = () =>{
         console.log('added enemy')
     }
 
-    const testConditions = () => {
-        console.log(party)
-        console.log(enemy)
+    const ContinueClick = () => {
+        nav('battle')
     }
     return (
         <>
@@ -63,9 +66,9 @@ const PartySelect = () =>{
                 ))}
             </div>
         </div>
-        <button onClick={testConditions}>Test</button>
-        </>
 
+        <button onClick={ContinueClick}>continue</button>
+        </>
     )
 }
 
