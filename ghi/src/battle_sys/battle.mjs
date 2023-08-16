@@ -50,7 +50,7 @@ class BattleSystem{
             if(select_character.cur_en !== select_character.max_en){
                 return {'message':'Not enough energy'}
             }
-            char_action = select_character.ult(atk_type)
+            const char_action = select_character.ult(atk_type)
             skill_multi = char_action['dmg']
         }
 

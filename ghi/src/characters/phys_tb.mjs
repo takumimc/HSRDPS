@@ -39,4 +39,30 @@ class PhysTb extends BaseCharacter {
     }
 }
 
-export default PhysTb
+                    const character_data = {
+                        'character': 'Physical Trailblazer',
+                        'element': 'physical',
+                        'base_hp': 1000,
+                        'base_atk': 500,
+                        'base_def': 500,
+                        'base_spd': 120,
+                        'hp_per': 0,
+                        'atk_per': 0,
+                        'defe_per': 0,
+                        'crit_rate': 0,
+                        'crit_dmg': 0,
+                        'break_effect': 0,
+                        'outgoing_heal': 0,
+                        'max_energy': 100,
+                        'energy_regen': 0,
+                        'effect_hitrate': 0,
+                        'effect_hitres': 0,
+                        'element_dmg_boost': 0,
+                        'element_dmg_res': 0,
+                        'auto_lvl': 1,
+                        'skill_lvl': 1,
+                        'ult_lvl': 1,
+                    }
+
+const PhysicalTrailblazer = new PhysTb(character_data)
+export default PhysicalTrailblazer

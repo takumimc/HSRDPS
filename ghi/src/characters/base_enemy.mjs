@@ -23,5 +23,5 @@ class BaseEnemy{
     }
 }
 
-
-export default BaseEnemy
+const Enemy = new BaseEnemy()
+export default Enemy
