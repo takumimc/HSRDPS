@@ -1,4 +1,5 @@
-
+// things to do
+// buttons appear only when its charactesr turn
 import BattleSystem from "../battle_sys/battle.mjs";
 import { UnitContext } from "../utils/UnitsContext";
 import { useContext, useRef } from "react";
@@ -37,15 +38,16 @@ const Battle = () => {
             console.log('missing parameters')
             return
         }
-        const dmg = battle_info.take_action(targetRef.current)
-        console.log(battle_info.turn_counter.current_character() +' did ' + dmg[targetRef.current['target']]
+        const turn = battle_info.take_action(targetRef.current)
+        console.log(turn)
+
+        console.log(turn['character'].character +' did ' + turn['dmg'][0][targetRef.current['target']]
          + ' to ' + targetRef.current['target'])
         targetRef.current = {
         'action': null,
         'atk_type': null,
         'target': null,
         }
-        console.log(party)
     }
 return (
     <>
@@ -53,14 +55,13 @@ return (
     <div>
         {party.map((character, index) => (
             <div key={character.character + index}>{character.character}
-            {character === battle_info.select() ?
-            character.action_list.map((action) => (
+            {character.action_list.map((action) => (
             <button key={action[2]} onClick={ActionSelect({
                 'action': action[0],
                 'atk_type': action[1]
             })}>
             {action[2]}</button>
-            )): ''}</div>
+            ))}</div>
         ))}
     <div>Select enemy</div>
         {enemy.map((character, index) => (
