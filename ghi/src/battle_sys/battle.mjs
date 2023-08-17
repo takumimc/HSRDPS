@@ -11,15 +11,20 @@ class BattleSystem{
         this.turn_counter = new TurnCount(this.all_units)
         this.history = []
     }
-    take_action(action){
+    select(){
        const current_character_turn = this.turn_counter.current_character()
+
        let select_character = null
        for(let unit of this.all_units){
         if(unit.character === current_character_turn){
             select_character = unit
+            }
         }
-    }
+        return select_character
+}
+    take_action(action){
 
+    let select_character = this.select()
     let target = null
     for(let unit of this.all_units){
         if(unit.character === action['target']){
@@ -28,6 +33,7 @@ class BattleSystem{
     }
 
     if(select_character.unit_type === 'enemy'){
+        this.turn_counter.next_turn()
         return 'placeholder'
     } else {
         const command = action['action']
@@ -92,6 +98,9 @@ class BattleSystem{
 
         outgoing_dmg[target.character] = dmg_calc
     }
+
+    this.turn_counter.next_turn()
+
     return outgoing_dmg
     }
 }
