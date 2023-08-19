@@ -1,18 +1,21 @@
 // things to do
-// buttons appear only when its charactesr turn
+// buttons appear only when its characters turn
+// implement enemy turn
 import BattleSystem from "../battle_sys/battle.mjs";
 import { UnitContext } from "../utils/UnitsContext";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 
 const Battle = () => {
 
     const {party, setParty} = useContext(UnitContext)
     const {enemy, setEnemy} = useContext(UnitContext)
+    const [history, setHistory] = useState([])
     const targetRef = useRef({
         'action': null,
         'atk_type': null,
         'target': null,
     })
+
 
     let battle_info = new BattleSystem(party,enemy)
 
@@ -39,10 +42,13 @@ const Battle = () => {
             return
         }
         const turn = battle_info.take_action(targetRef.current)
-        console.log(turn)
 
-        console.log(turn['character'].character +' did ' + turn['dmg'][0][targetRef.current['target']]
-         + ' to ' + targetRef.current['target'])
+        setHistory([{
+            'character': turn['character'],
+            'dmg': turn['dmg'][0][targetRef.current['target']],
+            'target': targetRef.current['target']
+        }, ...history])
+
         targetRef.current = {
         'action': null,
         'atk_type': null,
@@ -70,6 +76,14 @@ return (
         ))}
     </div>
     <button onClick={TakeAction}>Take action</button>
+    <div style={{
+        height: '200px',
+        overflow: 'auto'
+    }}>
+        {history.map((instance,index) => (
+            <p key={index}>{instance['character'].character} did {instance['dmg']} to {instance['target']}</p>
+        ))}
+    </div>
     </>
 )
 }
