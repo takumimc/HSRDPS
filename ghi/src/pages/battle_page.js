@@ -1,5 +1,3 @@
-// things to do
-// buttons appear only when its characters turn
 import BattleSystem from "../battle_sys/battle.mjs";
 import { UnitContext } from "../utils/UnitsContext";
 import { useContext, useRef, useState } from "react";
@@ -94,6 +92,12 @@ return (
             (instance['character'] === 'enemy') ?
             <p key={index}>enemy turn taken</p>:
             <p key={index}>{instance['character'].character} did {instance['dmg']} to {instance['target']}</p>
+        ))}
+    </div>
+    <div>
+        Turn Order
+        {battle_info.turn_counter.turn_list.map((char) => (
+            <p>{Object.keys(char)[0]}:{Object.values(char)[0]}</p>
         ))}
     </div>
     </>
