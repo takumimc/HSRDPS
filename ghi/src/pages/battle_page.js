@@ -24,7 +24,7 @@ const Battle = () => {
     const ActionSelect = (action) => () => {
 
         if(action['action'] === 'ult' && battle_info.select().cur_en < battle_info.select().max_en){
-            console.log('not enough energy')
+            alert(`Unable to use, ${battle_info.select().character} is currently at ${battle_info.select().cur_en} out of ${battle_info.select().max_en} energy`)
             return
         }
         targetRef.current['action']= action['action']
@@ -79,7 +79,7 @@ return (
         ))}
     <div>Select enemy</div>
         {enemy.map((character, index) => (
-            <div key={character.character + index} >{character.character}
+            <div key={character.character + index} >{index + 1}.{character.character}
             <button onClick={EnemySelect(character.character)}>Select as target</button></div>
         ))}
     </div>

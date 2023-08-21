@@ -15,7 +15,10 @@ const PartySelect = () =>{
     }
     const addPartyClick = (character) => () => {
         if(party.length === 4){
-            console.log('maximum party size')
+            alert('Maximum party size reached')
+            return
+        } else if (party.indexOf(character) > -1){
+            alert('Character is already in the party')
             return
         }
         setParty([...party,character])
