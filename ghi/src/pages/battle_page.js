@@ -1,6 +1,5 @@
 // things to do
 // buttons appear only when its characters turn
-// implement enemy turn
 import BattleSystem from "../battle_sys/battle.mjs";
 import { UnitContext } from "../utils/UnitsContext";
 import { useContext, useRef, useState } from "react";
@@ -71,13 +70,14 @@ return (
     <div>
         {party.map((character, index) => (
             <div key={character.character + index}>{character.character}
-            {character.action_list.map((action) => (
+            {battle_info.select().character === character.character ?
+            character.action_list.map((action) => (
             <button key={action[2]} onClick={ActionSelect({
                 'action': action[0],
                 'atk_type': action[1]
             })}>
             {action[2]}</button>
-            ))}</div>
+            )): null}</div>
         ))}
     <div>Select enemy</div>
         {enemy.map((character, index) => (
