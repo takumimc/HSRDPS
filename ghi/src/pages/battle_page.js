@@ -17,8 +17,8 @@ const Battle = () => {
     })
 
 
-    let battle_info = new BattleSystem(party,enemy)
-
+    const battle = useRef(new BattleSystem(party,enemy))
+    const battle_info = battle.current
 
     const EnemySelect = (target) => () => {
         targetRef.current['target'] = target
@@ -43,17 +43,27 @@ const Battle = () => {
         }
         const turn = battle_info.take_action(targetRef.current)
 
-        setHistory([{
+        const charHistory = {
             'character': turn['character'],
             'dmg': turn['dmg'][0][targetRef.current['target']],
             'target': targetRef.current['target']
-        }, ...history])
+        }
 
+        const enemyHistory = {}
+        let enemy_check=battle_info.select()
+        if(enemy_check.unit_type === 'enemy'){
+            enemyHistory['character'] = 'enemy'
+            battle_info.turn_counter.next_turn()
+            setHistory([enemyHistory,charHistory,...history])
+        } else{
+            setHistory([charHistory, ...history])
+        }
         targetRef.current = {
         'action': null,
         'atk_type': null,
         'target': null,
         }
+
     }
 return (
     <>
@@ -81,6 +91,8 @@ return (
         overflow: 'auto'
     }}>
         {history.map((instance,index) => (
+            (instance['character'] === 'enemy') ?
+            <p key={index}>enemy turn taken</p>:
             <p key={index}>{instance['character'].character} did {instance['dmg']} to {instance['target']}</p>
         ))}
     </div>

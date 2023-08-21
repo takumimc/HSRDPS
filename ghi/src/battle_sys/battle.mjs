@@ -12,7 +12,7 @@ class BattleSystem{
         this.history = []
     }
     select(){
-       const current_character_turn = this.turn_counter.current_character()
+       let current_character_turn = this.turn_counter.current_character()
 
        let select_character = null
        for(let unit of this.all_units){
@@ -26,15 +26,16 @@ class BattleSystem{
     take_action(action){
 
     let select_character = this.select()
+
     let target = null
     for(let unit of this.all_units){
         if(unit.character === action['target']){
             target = unit
         }
     }
-    console.log(target)
+
     if(select_character.unit_type === 'enemy'){
-        //placeholder
+
         let outgoing_dmg = {
         'character': select_character,
         'dmg': []
