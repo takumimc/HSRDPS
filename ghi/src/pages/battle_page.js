@@ -96,8 +96,8 @@ return (
     </div>
     <div>
         Turn Order
-        {battle_info.turn_counter.turn_list.map((char) => (
-            <p>{Object.keys(char)[0]}:{Object.values(char)[0]}</p>
+        {battle_info.turn_counter.turn_list.map((char,index) => (
+            <p key={index}>{Object.keys(char)[0]}:{Object.values(char)[0]}</p>
         ))}
     </div>
     </>
