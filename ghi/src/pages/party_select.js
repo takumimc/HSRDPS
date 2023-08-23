@@ -1,6 +1,6 @@
 import enemies from "../characters/enemy_index.mjs";
 import characters from "../characters/party_index.mjs";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UnitContext } from "../utils/UnitsContext";
 import { useNavigate } from "react-router-dom";
 
@@ -10,30 +10,38 @@ const PartySelect = () =>{
     const {party, setParty} = useContext(UnitContext)
     const {enemy, setEnemy} = useContext(UnitContext)
 
-    const showCharacters = () => {
-        console.log('clicked')
-    }
-    const addPartyClick = (character) => () => {
+    const [selectP, setSelectP] = useState(null)
+    const [selectE, setSelectE] = useState(null)
+
+    const addPartyClick = (select) => () => {
         if(party.length === 4){
             alert('Maximum party size reached')
             return
-        } else if (party.indexOf(character) > -1){
+        } else if (party.indexOf(select) > -1){
             alert('Character is already in the party')
             return
         }
-        setParty([...party,character])
+        setParty([...party,select])
         console.log('added character')
+        setSelectP(null)
     }
-    const showEnemies = () => {
-        console.log('clicked')
+
+    const selectPartyClick = (character) => () => {
+        setSelectP(character)
     }
+
+    const selectEnemyClick = (character) => () => {
+        setSelectE(character)
+    }
+
     const addEnemyClick = (character) => () => {
         if(enemy.length === 5){
             console.log('maximum enemy')
             return
         }
         setEnemy([...enemy,character])
-        console.log('added enemy')
+        setSelectE(null)
+
     }
 
     const ContinueClick = () => {
@@ -48,12 +56,13 @@ const PartySelect = () =>{
                     <div key={index}>{character.character}</div>
                 ))}
             </div>
-            <div onClick={showCharacters}>Add Member</div>
+            <div>Add Member</div>
             <div id='character-list' >
                 {characters.map(character => (
-                    <div key={character.character} onClick={addPartyClick(character)}>{character.character}</div>
+                    <div key={character.character} onClick={selectPartyClick(character)}>{character.character}</div>
                 ))}
             </div>
+            <button onClick={addPartyClick(selectP)}>Add</button>
         </div>
         <div>
             Enemy list
@@ -62,12 +71,13 @@ const PartySelect = () =>{
                     <div key={index}>{character.character}</div>
                 ))}
             </div>
-            <div onClick={showEnemies}>Add Enemy</div>
+            <div>Add Enemy</div>
             <div id='enemy-list' >
                 {enemies.map(character => (
-                    <div key={character.character} onClick={addEnemyClick(character)}>{character.character}</div>
+                    <div key={character.character} onClick={selectEnemyClick(character)}>{character.character}</div>
                 ))}
             </div>
+        <button onClick={addEnemyClick(selectE)}>Add</button>
         </div>
 
         <button onClick={ContinueClick}>continue</button>
