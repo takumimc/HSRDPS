@@ -35,7 +35,7 @@ const EnemySelect= () =>{
     return (
         <>
         <div>
-            Current Party:
+            Current Enemies:
             <div className='container mx-auto px-0 'style={{height: '250px'}}>
                 <div className='row mx-0 px-0'>
                 {enemy.map((character, index) => (
@@ -81,7 +81,7 @@ const EnemySelect= () =>{
                 {enemies.map(character => (
                     <button type='button' className="list-group-item list-group-item-action" key={character.character} onClick={selectPartyClick(character)}>{character.character}</button>
                 ))}
-                <button className="btn btn-outline-dark" onClick={ContinueClick}>Go to Enemy Select</button>
+                <button className="btn btn-outline-dark" onClick={ContinueClick}>Go to Battle</button>
                 </div>
                     { selectP ?
                     <>
@@ -89,15 +89,19 @@ const EnemySelect= () =>{
                         <img className='img-fluid' src={selectP.img}/>
                         </div>
                     <div className='col-sm'>
-                        <p>{selectP.element}</p>
-                        <p>HP:{selectP.hp}</p>
-                        <p>ATK:{selectP.atk}</p>
+                        <p>Weakness: {selectP.weakness.map((item) => (
+                            <>
+                            {item},
+                            </>
+                        ))}</p>
+                        <p>Toughness:{selectP.toughness}</p>
+                        <p>DEF:{selectP.def}</p>
                         <p>SPD:{selectP.base_spd}</p>
                     <button className="btn btn-dark" onClick={addPartyClick(selectP)}>Add</button>
                     </div>
                     </>
                     : <div className='col text-center'>
-                        Select a character
+                        Select an enemy
                         </div>}
             </div>
             </div>

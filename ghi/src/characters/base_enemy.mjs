@@ -1,6 +1,8 @@
+import { enemyIMG } from "../assets/index.mjs"
+
 class BaseEnemy{
     constructor(){
-        this.character = 'enemy'
+        this.character = 'Base Enemy'
         this.unit_type = 'enemy'
         this.base_spd = 100
         this.toughness = 300
@@ -16,7 +18,9 @@ class BaseEnemy{
         }
         this.ele_vuln = {}
         this.atk = 100
+        this.def = 600
         this.hp = 999999
+        this.img= enemyIMG
     }
     get_turn_info(){
         const info = {}
