@@ -4,17 +4,17 @@ class BaseEnemy{
     constructor(){
         this.character = 'Base Enemy'
         this.unit_type = 'enemy'
-        this.base_spd = 100
+        this.base_spd = 95
         this.toughness = 300
         this.weakness = ['Physical','Lightning','Wind']
         this.ele_res = {
-            'physical': 0,
-            'fire': 0,
-            'ice': 0,
-            'lightning': 0,
-            'wind': 0,
-            'quantum': 0,
-            'imaginary': 0,
+            'Physical': 0,
+            'Fire': 0,
+            'Ice': 0,
+            'Lightning': 0,
+            'Wind': 0,
+            'Quantum': 0,
+            'Imaginary': 0,
         }
         this.ele_vuln = {}
         this.atk = 100

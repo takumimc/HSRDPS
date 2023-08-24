@@ -29,7 +29,6 @@ const Battle = () => {
         }
         targetRef.current['action']= action['action']
         targetRef.current['atk_type']= action['atk_type']
-
     }
 
     const TakeAction = () => {

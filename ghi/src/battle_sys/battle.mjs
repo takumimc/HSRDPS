@@ -50,7 +50,7 @@ class BattleSystem{
         const command = action['action']
         const atk_type = action['atk_type']
 
-        let skill_multi = 0
+        let skill_multi = {}
         if(command === 'auto'){
             let char_action = select_character.auto(atk_type)
             skill_multi = char_action['dmg']
@@ -82,11 +82,14 @@ class BattleSystem{
         let extra_dmg = 0
         const base_dmg = parseFloat((dmg + extra_multi) * select_character.atk + extra_dmg)
 
+
         let crit_rate = select_character.crit_rate
         if(crit_rate > 1){
             crit_rate = 1
         }
         const crit_dmg = parseFloat(1+((select_character.crit_dmg)*crit_rate))
+
+        console.log('crit',crit_dmg)
 
         let all_dmg_boost = 0
         let dot_boost = 0
@@ -96,6 +99,8 @@ class BattleSystem{
         const lvl_en = 80
         const def_reduc_per = 0
         const def_multi = parseFloat((lvl_atk+20)/((lvl_en * (1-def_reduc_per)) + lvl_atk + 20))
+
+
 
         const element = select_character.element
         const res_pen = 0
@@ -111,8 +116,10 @@ class BattleSystem{
         let dmg_calc = base_dmg * crit_dmg * dmg_boost_multi * def_multi * res_multi * vuln_multi * tough_multi
 
         let dmg_info = {}
-        dmg_info[target.character] = dmg_calc
+        dmg_info[target.character] = parseInt(dmg_calc)
         outgoing_dmg['dmg'].push(dmg_info)
+
+        console.log(dmg_info)
     }
 
     this.turn_counter.next_turn()
