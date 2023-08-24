@@ -18,6 +18,12 @@ const Battle = () => {
     const battle_info = battle.current
 
     const EnemySelect = (target) => () => {
+        if(targetRef.current['atk_type'] === 'blast'){
+            let targets = [target]
+            console.log(enemy.indexOf(target))
+            console.log(enemy)
+            targetRef.current['target'] = targets
+        }
         targetRef.current['target'] = target
     }
 

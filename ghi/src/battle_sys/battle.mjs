@@ -71,7 +71,7 @@ class BattleSystem{
             const char_action = select_character.ult(atk_type)
             skill_multi = char_action['dmg']
         }
-
+    console.log(skill_multi)
     let outgoing_dmg = {
         'character': select_character,
         'dmg': []
@@ -89,7 +89,7 @@ class BattleSystem{
         }
         const crit_dmg = parseFloat(1+((select_character.crit_dmg)*crit_rate))
 
-        console.log('crit',crit_dmg)
+
 
         let all_dmg_boost = 0
         let dot_boost = 0
@@ -119,7 +119,7 @@ class BattleSystem{
         dmg_info[target.character] = parseInt(dmg_calc)
         outgoing_dmg['dmg'].push(dmg_info)
 
-        console.log(dmg_info)
+
     }
 
     this.turn_counter.next_turn()

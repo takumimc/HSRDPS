@@ -21,6 +21,7 @@ const EnemySelect= () =>{
             return
         }
         setEnemy([...enemy,select])
+        console.log(enemy)
         setSelectP(null)
     }
 
@@ -78,9 +79,12 @@ const EnemySelect= () =>{
             <div className='row' style={{height:'100%'}}>
             <div id='character-list' className='col-sm-2 list-group'>
             <div className="list-group-item text-bg-dark">Select character</div>
-                {enemies.map(character => (
-                    <button type='button' className="list-group-item list-group-item-action" key={character.character} onClick={selectPartyClick(character)}>{character.character}</button>
-                ))}
+                {enemies.map(enemyClass => {
+                    let character = new enemyClass(enemy.length)
+                    return (
+                    <button type='button' className="list-group-item list-group-item-action" key={character.character} onClick={selectPartyClick(character)}>
+                        {character.character}</button>)
+                })}
                 <button className="btn btn-outline-dark" onClick={ContinueClick}>Go to Battle</button>
                 </div>
                     { selectP ?

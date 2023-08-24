@@ -1,7 +1,7 @@
-import Enemy from "./base_enemy.mjs"
+import BaseEnemy from "./base_enemy.mjs"
 
 const enemies = [
- Enemy,
+ BaseEnemy,
 ]
 
 export default enemies

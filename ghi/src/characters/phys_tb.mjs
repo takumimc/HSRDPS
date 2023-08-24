@@ -24,7 +24,7 @@ class PhysTb extends BaseCharacter {
     skill(){
         this.increase_en(30)
         const action = {
-            'dmg':[1.25],
+            'dmg':[1.25,1.25,1.25],
             'atk_type':'blast'
         }
         return action
@@ -40,7 +40,7 @@ class PhysTb extends BaseCharacter {
         }
         else if (atk_type === 'blast'){
             const action = {
-                'dmg':[2.7,1.62],
+                'dmg':[2.7,1.62,1.62],
                 'atk_type' : atk_type
 
             }

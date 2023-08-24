@@ -1,7 +1,7 @@
 import { enemyIMG } from "../assets/index.mjs"
 
 class BaseEnemy{
-    constructor(){
+    constructor(position){
         this.character = 'Base Enemy'
         this.unit_type = 'enemy'
         this.base_spd = 95
@@ -21,6 +21,7 @@ class BaseEnemy{
         this.def = 600
         this.hp = 999999
         this.img= enemyIMG
+        this.position = position
     }
     get_turn_info(){
         const info = {}
@@ -29,5 +30,5 @@ class BaseEnemy{
     }
 }
 
-const Enemy = new BaseEnemy()
-export default Enemy
+// const Enemy = new BaseEnemy()
+export default BaseEnemy
