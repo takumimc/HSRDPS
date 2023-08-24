@@ -7,7 +7,7 @@ class PhysTb extends BaseCharacter {
             ['auto','single','Auto'],
             ['skill','blast','Skill'],
             ['ult','single','Single Target Ult'],
-            ['ult','blast','AOE Ult'],
+            // ['ult','blast','AOE Ult'],
         ]
         this.img = phystbIMG
     }

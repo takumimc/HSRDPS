@@ -26,7 +26,6 @@ class BattleSystem{
     take_action(action){
 
     let select_character = this.select()
-
     let target = null
     for(let unit of this.all_units){
         if(unit.character === action['target']){
@@ -71,7 +70,7 @@ class BattleSystem{
             const char_action = select_character.ult(atk_type)
             skill_multi = char_action['dmg']
         }
-    console.log(skill_multi)
+
     let outgoing_dmg = {
         'character': select_character,
         'dmg': []
@@ -115,6 +114,7 @@ class BattleSystem{
         let tough_multi = .9
         let dmg_calc = base_dmg * crit_dmg * dmg_boost_multi * def_multi * res_multi * vuln_multi * tough_multi
 
+        console.log(dmg_calc)
         let dmg_info = {}
         dmg_info[target.character] = parseInt(dmg_calc)
         outgoing_dmg['dmg'].push(dmg_info)
@@ -123,7 +123,7 @@ class BattleSystem{
     }
 
     this.turn_counter.next_turn()
-
+    console.log('outgoing',outgoing_dmg)
     return outgoing_dmg
     }
 }

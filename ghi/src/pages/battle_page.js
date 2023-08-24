@@ -18,13 +18,19 @@ const Battle = () => {
     const battle_info = battle.current
 
     const EnemySelect = (target) => () => {
-        if(targetRef.current['atk_type'] === 'blast'){
-            let targets = [target]
-            console.log(enemy.indexOf(target))
-            console.log(enemy)
-            targetRef.current['target'] = targets
-        }
-        targetRef.current['target'] = target
+        // if(targetRef.current['atk_type'] === 'blast'){
+        //     let targets = [target]
+        //     const mid = target.position
+        //     const left = mid - 1
+        //     const right = mid + 1
+
+        //     for(let guy of enemy){
+        //         console.log(guy)
+        //     }
+
+        //     targetRef.current['target'] = mid
+        // }
+        targetRef.current['target'] = target.character
     }
 
     const ActionSelect = (action) => () => {
@@ -85,7 +91,7 @@ return (
     <div>Select enemy</div>
         {enemy.map((character, index) => (
             <div key={character.character + index} >{index + 1}.{character.character}
-            <button onClick={EnemySelect(character.character)}>Select as target</button></div>
+            <button onClick={EnemySelect(character)}>Select as target</button></div>
         ))}
     </div>
     <button onClick={TakeAction}>Take action</button>

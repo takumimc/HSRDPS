@@ -16,8 +16,8 @@ const EnemySelect= () =>{
 
 
     const addPartyClick = (select) => () => {
-        if(enemy.length === 5){
-            alert('Maximum enemy size reached')
+        if(enemy.length === 1){
+            alert('Only one enemy currently supported')
             return
         }
         setEnemy([...enemy,select])
@@ -51,7 +51,7 @@ const EnemySelect= () =>{
                     <img src={silhouette} className='img-fluid'/>
                 </div>
                  : null}
-                {enemy.length < 2 ?<div className='col-sm-2 mx-auto'>
+                {/* {enemy.length < 2 ?<div className='col-sm-2 mx-auto'>
                     <p className='text-center'> None</p>
                     <img src={silhouette} className='img-fluid'/>
                 </div>
@@ -70,7 +70,7 @@ const EnemySelect= () =>{
                     <p className='text-center'> None</p>
                     <img src={silhouette} className='img-fluid'/>
                 </div>
-                 : null}
+                 : null} */}
 
             </div>
             </div>
