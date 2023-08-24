@@ -1,5 +1,5 @@
 import BaseCharacter from "./base_char.mjs"
-
+import { phystbIMG } from "../assets/index.mjs"
 class PhysTb extends BaseCharacter {
     constructor(data){
         super(data)
@@ -9,6 +9,7 @@ class PhysTb extends BaseCharacter {
             ['ult','single','Single Target Ult'],
             ['ult','blast','AOE Ult'],
         ]
+        this.img = phystbIMG
     }
     auto(){
         const lvl = this.auto_lvl

@@ -1,5 +1,5 @@
 import BaseCharacter from "./base_char.mjs"
-
+import { bladeIMG } from "../assets/index.mjs"
 class DanHeng extends BaseCharacter {
     constructor(data){
         super(data)
@@ -8,6 +8,7 @@ class DanHeng extends BaseCharacter {
             ['skill','blast','Skill'],
             ['ult','single','Single Target Ult'],
         ]
+        this.img = bladeIMG
     }
     auto(){
 

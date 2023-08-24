@@ -3,6 +3,8 @@ import characters from "../characters/party_index.mjs";
 import { useContext, useState } from "react";
 import { UnitContext } from "../utils/UnitsContext";
 import { useNavigate } from "react-router-dom";
+import { silhouette } from "../assets/index.mjs";
+
 
 const PartySelect = () =>{
     const nav = useNavigate()
@@ -50,11 +52,34 @@ const PartySelect = () =>{
     return (
         <>
         <div>
-            Party
-            <div>Current Party Members
+            Current Party Members
+            <div className='container'>
+                <div className='row'>
                 {party.map((character, index) => (
-                    <div key={index}>{character.character}</div>
+                    <div className='col-sm-2' key={index}>
+                        <p className='text-center'>{character.character}</p>
+                        <img src={character.img} className='img-fluid'/>
+                    </div>
                 ))}
+
+                {party.length < 1 ?<div className='col-sm-2'><img src={silhouette} className='img-fluid'/>
+                    <p className='text-center'> None</p>
+                </div>
+                 : null}
+                {party.length < 2 ?<div className='col-sm-2'><img src={silhouette} className='img-fluid'/>
+                    <p className='text-center'> None</p>
+                </div>
+                 : null}
+                {party.length < 3 ?<div className='col-sm-2'><img src={silhouette} className='img-fluid'/>
+                    <p className='text-center'> None</p>
+                </div>
+                 : null}
+                {party.length < 4 ?<div className='col-sm-2'><img src={silhouette} className='img-fluid'/>
+                    <p className='text-center'> None</p>
+                </div>
+                 : null}
+
+            </div>
             </div>
             <div>Add Member</div>
             <div id='character-list' >
@@ -62,7 +87,7 @@ const PartySelect = () =>{
                     <div key={character.character} onClick={selectPartyClick(character)}>{character.character}</div>
                 ))}
             </div>
-            <button onClick={addPartyClick(selectP)}>Add</button>
+            <button className="btn btn-dark" onClick={addPartyClick(selectP)}>Add</button>
         </div>
         <div>
             Enemy list
@@ -77,10 +102,10 @@ const PartySelect = () =>{
                     <div key={character.character} onClick={selectEnemyClick(character)}>{character.character}</div>
                 ))}
             </div>
-        <button onClick={addEnemyClick(selectE)}>Add</button>
+        <button className="btn btn-dark" onClick={addEnemyClick(selectE)}>Add</button>
         </div>
 
-        <button onClick={ContinueClick}>continue</button>
+        <button className="btn btn-dark" onClick={ContinueClick}>Continue</button>
         </>
     )
 }
