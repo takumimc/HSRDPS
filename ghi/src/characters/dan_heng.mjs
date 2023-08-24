@@ -41,7 +41,7 @@ class DanHeng extends BaseCharacter {
 
                     const character_data = {
                         'character': 'Dan Heng',
-                        'element': 'wind',
+                        'element': 'Wind',
                         'base_hp': 882,
                         'base_atk': 546,
                         'base_def': 396,

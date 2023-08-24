@@ -41,10 +41,10 @@ class DanHeng extends BaseCharacter {
 
                     const character_data = {
                         'character': 'Filler Slow',
-                        'element': 'wind',
-                        'base_hp': 882,
-                        'base_atk': 546,
-                        'base_def': 396,
+                        'element': 'Wind',
+                        'base_hp': 1058,
+                        'base_atk': 511,
+                        'base_def': 573,
                         'base_spd': 80,
                         'hp_per': 0,
                         'atk_per': 0,

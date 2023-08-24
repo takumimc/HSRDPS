@@ -51,7 +51,7 @@ class PhysTb extends BaseCharacter {
 
                     const character_data = {
                         'character': 'Physical Trailblazer',
-                        'element': 'physical',
+                        'element': 'Physical',
                         'base_hp': 1203,
                         'base_atk': 620,
                         'base_def': 460,
