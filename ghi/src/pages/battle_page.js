@@ -41,19 +41,22 @@ const Battle = () => {
         if(action['action'] === 'ult' && battle_info.select().cur_en < battle_info.select().max_en){
             alert(`Unable to use, ${battle_info.select().character} is currently at ${battle_info.select().cur_en} out of ${battle_info.select().max_en} energy`)
             return
+        } else if ( action['action'] === 'skill' && battle_info.sp_counter.sp < 1){
+            alert('Not enough SP, use auto instead')
+            return
         }
         targetRef.current['action']= action['action']
         targetRef.current['atk_type']= action['atk_type']
     }
 
     const TakeAction = () => {
-
+        console.log(targetRef.current)
         if(Object.values(targetRef.current).includes(null)){
-            console.log('missing parameters')
+            alert('Missing parameters, make sure to check an attack and target')
             return
         }
         const turn = battle_info.take_action(targetRef.current)
-
+        console.log(turn)
         const charHistory = {
             'character': turn['character'],
             'dmg': turn['dmg'][0][targetRef.current['target']],
@@ -79,7 +82,6 @@ const Battle = () => {
     }
 return (
     <>
-    <div>Party</div>
     <div className='container'>
         <div className='row'>
         {party.map((character, index) =>
@@ -88,18 +90,9 @@ return (
             <div className='col text-center'>
             <div  key={character.character + index}>{character.character}</div>
             <img src={character.img} />
-            <div>
-            {battle_info.select().character === character.character ?
-            character.action_list.map((action) => (
-            <button key={action[2]} onClick={ActionSelect({
-                'action': action[0],
-                'atk_type': action[1]
-            })}>
-            {action[2]}</button>
-            )): null}</div>
             </div>
         )})}
-        <div className='col'>
+        <div className='col' style={{height:'500px'}}>
         {targetRef.current['target'] === null ?
         <div className='text-center'>
             <p>Select target</p>
@@ -110,15 +103,39 @@ return (
             <img src={focus.img} className='img-fluid' style={{maxHeight: '431px'}} />
         </div>
         }
+    </div>
+    </div>
+        <div className='row text-center'>
+            {party.map((character) =>{
+                if(battle_info.select().character === character.character)
+                return (
+            <div className='col'>
+            {battle_info.select().character === character.character ?
+            character.action_list.map((action) => (
+            <button key={action[2]} onClick={ActionSelect({
+                'action': action[0],
+                'atk_type': action[1]
+            })}>
+            {action[2]}</button>
+            )): null}</div>
+                    )
+            })}
+            <div className='col'>Current Sp: {battle_info.sp_counter.sp}/5</div>
+        <div className='col'>
         {enemy.map((character) => (
             <button onClick={EnemySelect(character)}>{character.character}</button>
         ))}
         </div>
+        </div>
+        <div className='row mx-auto'>
+    <div className='col-sm-3'>
+        Turn Order
+        {battle_info.turn_counter.turn_list.map((char,index) => (
+            <p key={index}>{Object.keys(char)[0]}:{Object.values(char)[0]}</p>
+        ))}
+        <button onClick={TakeAction}>Take action</button>
     </div>
-</div>
-
-    <button onClick={TakeAction}>Take action</button>
-    <div style={{
+    <div className='col'style={{
         height: '200px',
         overflow: 'auto'
     }}>
@@ -128,12 +145,12 @@ return (
             <p key={index}>{instance['character'].character} did {instance['dmg']} to {instance['target']}</p>
         ))}
     </div>
-    <div>
-        Turn Order
-        {battle_info.turn_counter.turn_list.map((char,index) => (
-            <p key={index}>{Object.keys(char)[0]}:{Object.values(char)[0]}</p>
-        ))}
-    </div>
+        </div>
+
+
+</div>
+
+
     </>
 )
 }
