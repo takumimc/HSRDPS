@@ -1,7 +1,7 @@
 import BattleSystem from "../battle_sys/battle.mjs";
 import { UnitContext } from "../utils/UnitsContext";
 import { useContext, useRef, useState } from "react";
-
+import { silhouette } from "../assets/index.mjs";
 const Battle = () => {
 
     const {party, setParty} = useContext(UnitContext)
@@ -12,6 +12,8 @@ const Battle = () => {
         'atk_type': null,
         'target': null,
     })
+
+    const [focus, setFocus] =  useState(null)
 
 
     const battle = useRef(new BattleSystem(party,enemy))
@@ -31,6 +33,7 @@ const Battle = () => {
         //     targetRef.current['target'] = mid
         // }
         targetRef.current['target'] = target.character
+        setFocus(target)
     }
 
     const ActionSelect = (action) => () => {
@@ -71,14 +74,21 @@ const Battle = () => {
         'atk_type': null,
         'target': null,
         }
+        setFocus(null)
 
     }
 return (
     <>
-    <div>Battle</div>
-    <div>
-        {party.map((character, index) => (
-            <div key={character.character + index}>{character.character}
+    <div>Party</div>
+    <div className='container'>
+        <div className='row'>
+        {party.map((character, index) =>
+        {if(battle_info.select().character === character.character)
+        return(
+            <div className='col text-center'>
+            <div  key={character.character + index}>{character.character}</div>
+            <img src={character.img} />
+            <div>
             {battle_info.select().character === character.character ?
             character.action_list.map((action) => (
             <button key={action[2]} onClick={ActionSelect({
@@ -87,13 +97,26 @@ return (
             })}>
             {action[2]}</button>
             )): null}</div>
+            </div>
+        )})}
+        <div className='col'>
+        {targetRef.current['target'] === null ?
+        <div className='text-center'>
+            <p>Select target</p>
+          <img src={silhouette} className='img-fluid' style={{maxHeight: '300px'}}/>
+        </div>
+        : <div className='text-center'>
+            <p>{focus.character}</p>
+            <img src={focus.img} className='img-fluid' style={{maxHeight: '431px'}} />
+        </div>
+        }
+        {enemy.map((character) => (
+            <button onClick={EnemySelect(character)}>{character.character}</button>
         ))}
-    <div>Select enemy</div>
-        {enemy.map((character, index) => (
-            <div key={character.character + index} >{index + 1}.{character.character}
-            <button onClick={EnemySelect(character)}>Select as target</button></div>
-        ))}
+        </div>
     </div>
+</div>
+
     <button onClick={TakeAction}>Take action</button>
     <div style={{
         height: '200px',
@@ -101,7 +124,7 @@ return (
     }}>
         {history.map((instance,index) => (
             (instance['character'] === 'enemy') ?
-            <p key={index}>enemy turn taken</p>:
+            <p key={index}>Enemy turn taken</p>:
             <p key={index}>{instance['character'].character} did {instance['dmg']} to {instance['target']}</p>
         ))}
     </div>
