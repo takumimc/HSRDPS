@@ -41,8 +41,8 @@ const EnemySelect= () =>{
                 <div className='row mx-0 px-0'>
                 {enemy.map((character, index) => (
                     <div className='col-sm-2 mx-auto' key={index}>
-                        <p className='text-center'>{character.character}</p>
-                        <img src={character.img} className='img-fluid'/>
+                        <p className='text-center' key={index + 'p'}>{character.character}</p>
+                        <img src={character.img} className='img-fluid' key={index+ 'img'}/>
                     </div>
                 ))}
 
@@ -82,7 +82,7 @@ const EnemySelect= () =>{
                 {enemies.map(enemyClass => {
                     let character = new enemyClass(enemy.length)
                     return (
-                    <button type='button' className="list-group-item list-group-item-action" key={character.character} onClick={selectPartyClick(character)}>
+                    <button type='button' className="list-group-item list-group-item-action" key={character.position} onClick={selectPartyClick(character)}>
                         {character.character}</button>)
                 })}
                 <button className="btn btn-outline-dark" onClick={ContinueClick}>Go to Battle</button>

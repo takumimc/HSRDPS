@@ -29,6 +29,8 @@ class BaseCharacter {
         this.atk = this.base_atk * (1 + this.atk_per)
         this.def = this.base_def * (1 + this.def_per)
 
+        this.total_dmg = 0
+
     }
     increase_en(en_value){
         this.cur_en += (en_value * ( 1 + this.en_reg))

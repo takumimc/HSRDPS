@@ -15,10 +15,12 @@ const Battle = () => {
 
     const [focus, setFocus] =  useState(null)
 
-    const [info, setInfo] = useState(null)
 
     const battle = useRef(new BattleSystem(party,enemy))
     const battle_info = battle.current
+
+    const [info, setInfo] = useState(battle_info.all_units[0])
+
 
     const EnemySelect = (target) => () => {
         // if(targetRef.current['atk_type'] === 'blast'){
@@ -54,13 +56,13 @@ const Battle = () => {
     }
 
     const TakeAction = () => {
-        console.log(targetRef.current)
+
         if(Object.values(targetRef.current).includes(null)){
             alert('Missing parameters, make sure to check an attack and target')
             return
         }
         const turn = battle_info.take_action(targetRef.current)
-        console.log(turn)
+
         const charHistory = {
             'character': turn['character'],
             'dmg': turn['dmg'][0][targetRef.current['target']],
@@ -76,6 +78,7 @@ const Battle = () => {
         } else{
             setHistory([charHistory, ...history])
         }
+
         targetRef.current = {
         'action': null,
         'atk_type': null,
@@ -124,7 +127,7 @@ return (
             )): null}</div>
                     )
             })}
-            <div className='col'>Current Sp: {battle_info.sp_counter.sp}/5</div>
+
         <div className='col'>
         {enemy.map((character) => (
             <button onClick={EnemySelect(character)}>{character.character}</button>
@@ -132,7 +135,7 @@ return (
         </div>
         </div>
         <div className='row mx-auto'>
-    <div className='col-sm-3 px-0' style={{
+    <div className='col-sm-2 px-0' style={{
         height: '200px',
         overflow: 'auto'
     }}>
@@ -142,14 +145,20 @@ return (
         ))}
         <button onClick={TakeAction}>Take action</button>
     </div>
+    <div className='col-sm-2'>
+        Battle Info
+        <p className='mb-1 px-0'>Current Sp: {battle_info.sp_counter.sp}/5 </p>
+        <p className='mb-1 px-0'>Cycle: {battle_info.turn_counter.cycle}</p>
+        <p className='mb-1 px-0'>AV until next Cycle: {battle_info.turn_counter.current_cycle_AV}</p>
+    </div>
     <div className='col'style={{
         height: '200px',
         overflow: 'auto'
     }}>
         {history.map((instance,index) => (
             (instance['character'] === 'enemy') ?
-            <p key={index}>Enemy turn taken</p>:
-            <p key={index}>{instance['character'].character} did {instance['dmg']} to {instance['target']}</p>
+            <p className='mb-1 px-0' key={index}>Enemy turn taken</p>:
+            <p className='mb-1 px-0' key={index}>{instance['character'].character} did {instance['dmg']} to {instance['target']}</p>
         ))}
     </div>
         </div>
@@ -160,22 +169,39 @@ return (
                     <button type='button' className="list-group-item list-group-item-action" onClick={InfoSelect(character)} key={character.character}>{character.character}</button>
                 ))}
                 </div>
-                    { info ?
+                    { info.unit_type === 'player' ?
                     <>
                     <div className='col-sm-2' style={{height:'100%'}}>
                         <img className='img-fluid' src={info.img}/>
                         </div>
                     <div className='col-sm'>
-                        <p>{info.element}</p>
+                        <p>Element: {info.element}</p>
                         <p>HP:{info.hp}</p>
                         <p>ATK:{info.atk}</p>
                         <p>SPD:{info.base_spd}</p>
                         <p>Energy:{info.cur_en}/{info.max_en}</p>
+                        <p>Total Dmg Done: {info.total_dmg} </p>
                     </div>
                     </>
-                    : <div className='col text-center'>
-                        Select a character
-                        </div>}
+                    : null}
+                    { info.unit_type === 'enemy' ?
+                    <>
+                    <div className='col-sm-2' style={{height:'100%'}}>
+                        <img className='img-fluid' src={info.img}/>
+                        </div>
+                    <div className='col-sm'>
+                        <p>Weakness: {info.weakness.map((item) => (
+                            <>
+                            {item},
+                            </>
+                        ))}</p>
+                        <p>Toughness:{info.toughness}</p>
+                        <p>DEF:{info.def}</p>
+                        <p>SPD:{info.base_spd}</p>
+
+                    </div>
+                    </>
+                    : null}
     </div>
 
 

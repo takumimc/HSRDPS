@@ -114,7 +114,8 @@ class BattleSystem{
         let tough_multi = .9
         let dmg_calc = base_dmg * crit_dmg * dmg_boost_multi * def_multi * res_multi * vuln_multi * tough_multi
 
-        console.log(dmg_calc)
+        select_character.total_dmg += parseInt(dmg_calc)
+
         let dmg_info = {}
         dmg_info[target.character] = parseInt(dmg_calc)
         outgoing_dmg['dmg'].push(dmg_info)
@@ -123,7 +124,7 @@ class BattleSystem{
     }
 
     this.turn_counter.next_turn()
-    console.log('outgoing',outgoing_dmg)
+
     return outgoing_dmg
     }
 }
