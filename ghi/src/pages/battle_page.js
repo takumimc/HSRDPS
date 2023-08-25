@@ -15,6 +15,7 @@ const Battle = () => {
 
     const [focus, setFocus] =  useState(null)
 
+    const [info, setInfo] = useState(null)
 
     const battle = useRef(new BattleSystem(party,enemy))
     const battle_info = battle.current
@@ -36,6 +37,9 @@ const Battle = () => {
         setFocus(target)
     }
 
+    const InfoSelect = (character) => () => {
+        setInfo(character)
+    }
     const ActionSelect = (action) => () => {
 
         if(action['action'] === 'ult' && battle_info.select().cur_en < battle_info.select().max_en){
@@ -82,7 +86,7 @@ const Battle = () => {
     }
 return (
     <>
-    <div className='container'>
+    <div className='container px-0'>
         <div className='row'>
         {party.map((character, index) =>
         {if(battle_info.select().character === character.character)
@@ -105,7 +109,7 @@ return (
         }
     </div>
     </div>
-        <div className='row text-center'>
+        <div className='row text-center mx-0'>
             {party.map((character) =>{
                 if(battle_info.select().character === character.character)
                 return (
@@ -128,10 +132,13 @@ return (
         </div>
         </div>
         <div className='row mx-auto'>
-    <div className='col-sm-3'>
+    <div className='col-sm-3 px-0' style={{
+        height: '200px',
+        overflow: 'auto'
+    }}>
         Turn Order
         {battle_info.turn_counter.turn_list.map((char,index) => (
-            <p key={index}>{Object.keys(char)[0]}:{Object.values(char)[0]}</p>
+            <p className='mb-1 px-0'key={index}>{Object.keys(char)[0]}:{Object.values(char)[0]}</p>
         ))}
         <button onClick={TakeAction}>Take action</button>
     </div>
@@ -146,6 +153,30 @@ return (
         ))}
     </div>
         </div>
+    <div className='row mx-0'>
+ <div id='character-list' className='col-sm-3 list-group'>
+            <div className="list-group-item text-bg-dark">All units</div>
+                {battle_info.all_units.map(character => (
+                    <button type='button' className="list-group-item list-group-item-action" onClick={InfoSelect(character)} key={character.character}>{character.character}</button>
+                ))}
+                </div>
+                    { info ?
+                    <>
+                    <div className='col-sm-2' style={{height:'100%'}}>
+                        <img className='img-fluid' src={info.img}/>
+                        </div>
+                    <div className='col-sm'>
+                        <p>{info.element}</p>
+                        <p>HP:{info.hp}</p>
+                        <p>ATK:{info.atk}</p>
+                        <p>SPD:{info.base_spd}</p>
+                        <p>Energy:{info.cur_en}/{info.max_en}</p>
+                    </div>
+                    </>
+                    : <div className='col text-center'>
+                        Select a character
+                        </div>}
+    </div>
 
 
 </div>
