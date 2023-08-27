@@ -35,19 +35,20 @@ const EnemySelect= () =>{
     }
     return (
         <>
-        <div>
+        <div className='p-3 mb-2 bg-dark text-emphasis-dark vh-100 vw-100'>
             Current Enemies:
-            <div className='container mx-auto px-0 'style={{height: '250px'}}>
+            <div className='container mx-auto px-0'style={{height: '285px'}}>
+                <div className='mx-0 px-0 border border-dark rounded bg-dark-subtle h-100 d-inline-block w-100'>
                 <div className='row mx-0 px-0'>
                 {enemy.map((character, index) => (
                     <div className='col-sm-2 mx-auto' key={index}>
-                        <p className='text-center' key={index + 'p'}>{character.character}</p>
+                        <p className='text-center fw-bold fs-5' key={index + 'p'}>{character.character}</p>
                         <img src={character.img} className='img-fluid' key={index+ 'img'}/>
                     </div>
                 ))}
 
                 {enemy.length < 1 ?<div className='col-sm-2 mx-auto'>
-                    <p className='text-center'> None</p>
+                    <p className='text-center fw-bold fs-5'> None</p>
                     <img src={silhouette} className='img-fluid'/>
                 </div>
                  : null}
@@ -74,10 +75,14 @@ const EnemySelect= () =>{
 
             </div>
             </div>
-
-            <div className='mx-0 px-0' style={{height: '300px'}}>
-            <div className='row' style={{height:'100%'}}>
-            <div id='character-list' className='col-sm-2 list-group'>
+            </div>
+            <div className='container mx-auto px-0 mt-5' style={{height: '300px'}}>
+            <div className='row mx-auto border border-dark rounded bg-dark-subtle' style={{height:'100%'}}>
+            <div id='character-list' className='col-sm-2 list-group' style={{
+        height: '298px',
+        overflow: 'auto'
+    }}>
+        <div className='h-100 d-inline-block bg-white '>
             <div className="list-group-item text-bg-dark">Select character</div>
                 {enemies.map(enemyClass => {
                     let character = new enemyClass(enemy.length)
@@ -85,14 +90,16 @@ const EnemySelect= () =>{
                     <button type='button' className="list-group-item list-group-item-action" key={character.position} onClick={selectPartyClick(character)}>
                         {character.character}</button>)
                 })}
-                <button className="btn btn-outline-dark" onClick={ContinueClick}>Go to Battle</button>
+                </div>
+                <button className="list-group-item list-group-item-action" onClick={ContinueClick}>Go to Battle</button>
                 </div>
                     { selectP ?
                     <>
-                    <div className='col-sm-2' style={{height:'100%'}}>
+                    <div className='col-sm-2 align-items-center d-flex border-end' style={{height:'100%'}}>
                         <img className='img-fluid' src={selectP.img}/>
                         </div>
-                    <div className='col-sm'>
+                    <div className='col-sm-6 mt-auto mb-auto mx-2'>
+                        <p>{selectP.character}'s Stats</p>
                         <p>Weakness: {selectP.weakness.map((item) => (
                             <>
                             {item},
@@ -104,8 +111,8 @@ const EnemySelect= () =>{
                     <button className="btn btn-dark" onClick={addPartyClick(selectP)}>Add</button>
                     </div>
                     </>
-                    : <div className='col text-center'>
-                        Select an enemy
+                    : <div className='col text-center mt-auto mb-auto'>
+                        <h1>Select an enemy</h1>
                         </div>}
             </div>
             </div>

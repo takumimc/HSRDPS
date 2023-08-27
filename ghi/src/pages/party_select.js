@@ -38,65 +38,74 @@ const PartySelect = () =>{
     }
     return (
         <>
-        <div>
+        <div className='p-3 mb-2 bg-dark text-emphasis-dark vh-100 vw-100'>
             Current Party:
-            <div className='container mx-auto px-0 'style={{height: '250px'}}>
-                <div className='row mx-0 px-0'>
+            <div className='container mx-auto px-0'style={{height: '285px'}}>
+                <div className='mx-0 px-0 border border-dark rounded bg-dark-subtle h-100 d-inline-block w-100'>
+                    <div className='row h-100'>
                 {party.map((character, index) => (
-                    <div className='col-sm-2 mx-auto' key={index}>
-                        <p className='text-center'>{character.character}</p>
-                        <img src={character.img} className='img-fluid'/>
+                    <div className='col-sm-2 d-inline w-25 h-100 px-0' key={index}>
+                        <div className='mx-auto'>
+                        <p className='text-center fw-bold fs-5'>{character.character}</p>
+                        <img src={character.img} className='mx-auto d-block' style={{width:'60%'}}/>
+                        </div>
                     </div>
                 ))}
 
-                {party.length < 1 ?<div className='col-sm-2 mx-auto'>
-                    <p className='text-center'> None</p>
+                {party.length < 1 ?<div className='col-sm-2 d-inline w-25 h-100 px-0 border-end'>
+                    <p className='text-center fw-bold fs-5'> None</p>
                     <img src={silhouette} className='img-fluid'/>
                 </div>
                  : null}
-                {party.length < 2 ?<div className='col-sm-2 mx-auto'>
-                    <p className='text-center'> None</p>
-                    <img src={silhouette} className='img-fluid'/>
+                {party.length < 2 ?<div className='col-sm-2 d-inline w-25 h-100 px-0'>
+                    <p className='text-center fw-bold fs-5'> None</p>
+                    <img src={silhouette} className='mx-auto d-block' style={{width: '60%'}}/>
                 </div>
                  : null}
-                {party.length < 3 ?<div className='col-sm-2 mx-auto'>
-                    <p className='text-center'> None</p>
-                    <img src={silhouette} className='img-fluid'/>
+                {party.length < 3 ?<div className='col-sm-2 d-inline w-25 h-100 px-0'>
+                    <p className='text-center fw-bold fs-5'> None</p>
+                    <img src={silhouette} className='mx-auto d-block' style={{width: '60%'}}/>
                 </div>
                  : null}
-                {party.length < 4 ?<div className='col-sm-2 mx-auto'>
-                    <p className='text-center'> None</p>
-                    <img src={silhouette} className='img-fluid'/>
+                {party.length < 4 ?<div className='col-sm-2 d-inline w-25 h-100 px-0'>
+                    <p className='text-center fw-bold fs-5'> None</p>
+                    <img src={silhouette} className='mx-auto d-block' style={{width: '60%'}}/>
                 </div>
                  : null}
-
+</div>
             </div>
             </div>
 
-            <div className='mx-0 px-0' style={{height: '300px'}}>
-            <div className='row' style={{height:'100%'}}>
-            <div id='character-list' className='col-sm-2 list-group'>
+            <div className='container mx-auto px-0 mt-5' style={{height: '300px'}}>
+            <div className='row mx-auto border border-dark rounded bg-dark-subtle' style={{height:'100%'}}>
+            <div id='character-list' className='col-sm-2 list-group' style={{
+        height: '298px',
+        overflow: 'auto'
+    }}>
+                <div className='h-100 d-inline-block bg-white '>
             <div className="list-group-item text-bg-dark">Select character</div>
                 {characters.map(character => (
                     <button type='button' className="list-group-item list-group-item-action" key={character.character} onClick={selectPartyClick(character)}>{character.character}</button>
                 ))}
-                <button className="btn btn-outline-dark" onClick={ContinueClick}>Go to Enemy Select</button>
+                </div>
+                <button className="list-group-item list-group-item-action" onClick={ContinueClick}>Go to Enemy Select</button>
                 </div>
                     { selectP ?
                     <>
-                    <div className='col-sm-2' style={{height:'100%'}}>
+                    <div className='col-sm-2 align-items-center d-flex border-end' style={{height:'100%'}}>
                         <img className='img-fluid' src={selectP.img}/>
                         </div>
-                    <div className='col-sm'>
-                        <p>{selectP.element}</p>
+                    <div className='col-sm-6 mt-auto mb-auto mx-2'>
+                        <p>{selectP.character}'s Stats</p>
+                        <p>Element: {selectP.element}</p>
                         <p>HP:{selectP.hp}</p>
                         <p>ATK:{selectP.atk}</p>
                         <p>SPD:{selectP.base_spd}</p>
                     <button className="btn btn-dark" onClick={addPartyClick(selectP)}>Add</button>
                     </div>
                     </>
-                    : <div className='col text-center'>
-                        Select a character
+                    : <div className='col text-center mt-auto mb-auto'>
+                        <h1>Select a character</h1>
                         </div>}
             </div>
             </div>
