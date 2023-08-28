@@ -78,7 +78,7 @@ const PartySelect = () =>{
 
             <div className='container mx-auto px-0 mt-5' style={{height: '300px'}}>
             <div className='row mx-auto border border-dark rounded bg-dark-subtle' style={{height:'100%'}}>
-            <div id='character-list' className='col-sm-2 list-group' style={{
+            <div id='character-list' className='col-sm-2 list-group mx-0 px-0' style={{
         height: '298px',
         overflow: 'auto'
     }}>
@@ -88,21 +88,29 @@ const PartySelect = () =>{
                     <button type='button' className="list-group-item list-group-item-action" key={character.character} onClick={selectPartyClick(character)}>{character.character}</button>
                 ))}
                 </div>
-                <button className="list-group-item list-group-item-action" onClick={ContinueClick}>Go to Enemy Select</button>
+                <button className="list-group-item list-group-item-action list-group-item-success" onClick={ContinueClick}>Go to Enemy Select</button>
                 </div>
                     { selectP ?
                     <>
-                    <div className='col-sm-2 align-items-center d-flex border-end' style={{height:'100%'}}>
+                                        <div className='col-sm-2 align-items-center d-flex border-end px-0' style={{height:'100%'}}>
                         <img className='img-fluid' src={selectP.img}/>
                         </div>
-                    <div className='col-sm-6 mt-auto mb-auto mx-2'>
-                        <p>{selectP.character}'s Stats</p>
-                        <p>Element: {selectP.element}</p>
-                        <p>HP:{selectP.hp}</p>
-                        <p>ATK:{selectP.atk}</p>
-                        <p>SPD:{selectP.base_spd}</p>
-                    <button className="btn btn-dark" onClick={addPartyClick(selectP)}>Add</button>
-                    </div>
+                    <div id='char-info' className='col list-group px-0'>
+        <div className='h-100 d-inline-block bg-white'>
+            <div className="list-group-item text-bg-dark">{selectP.character}'s Stats</div>
+            <div style={{
+        height: '212px',
+        overflow: 'auto'
+    }}>
+        <div className="list-group-item list-group-item-action" >Element: {selectP.element}</div>
+        <div className="list-group-item list-group-item-action" >HP: {selectP.hp}</div>
+        <div className="list-group-item list-group-item-action" >ATK: {selectP.atk}</div>
+        <div className="list-group-item list-group-item-action" >SPD: {selectP.base_spd}</div>
+                </div>
+        <button className="btn btn-dark" onClick={addPartyClick(selectP)}>Add to party</button>
+
+                </div>
+                </div>
                     </>
                     : <div className='col text-center mt-auto mb-auto'>
                         <h1>Select a character</h1>

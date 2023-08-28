@@ -97,21 +97,30 @@ const EnemySelect= () =>{
                 </div>
                     { selectP ?
                     <>
-                    <div className='col-sm-2 align-items-center d-flex border-end' style={{height:'100%'}}>
+                                                            <div className='col-sm-2 align-items-center d-flex border-end px-0' style={{height:'100%'}}>
                         <img className='img-fluid' src={selectP.img}/>
                         </div>
-                    <div className='col-sm-6 mt-auto mb-auto mx-2'>
-                        <p>{selectP.character}'s Stats</p>
-                        <p>Weakness: {selectP.weakness.map((item) => (
+                    <div id='char-info' className='col list-group px-0'>
+        <div className='h-100 d-inline-block bg-white'>
+            <div className="list-group-item text-bg-dark">{selectP.character}'s Stats</div>
+            <div style={{
+        height: '212px',
+        overflow: 'auto'
+    }}>
+        <div className="list-group-item list-group-item-action" >Weakness:{selectP.weakness.map((item) => (
                             <>
                             {item},
                             </>
-                        ))}</p>
-                        <p>Toughness:{selectP.toughness}</p>
-                        <p>DEF:{selectP.def}</p>
-                        <p>SPD:{selectP.base_spd}</p>
-                    <button className="btn btn-dark" onClick={addPartyClick(selectP)}>Add</button>
-                    </div>
+                        ))}</div>
+        <div className="list-group-item list-group-item-action" >Toughness:{selectP.toughness}</div>
+        <div className="list-group-item list-group-item-action" >DEF:{selectP.def}</div>
+        <div className="list-group-item list-group-item-action" >SPD:{selectP.base_spd}</div>
+                </div>
+        <button className="btn btn-dark" onClick={addPartyClick(selectP)}>Add to enemies</button>
+
+                </div>
+                </div>
+
                     </>
                     : <div className='col text-center mt-auto mb-auto'>
                         <h1>Select an enemy</h1>

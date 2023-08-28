@@ -122,7 +122,7 @@ return (
             <div className='col'>
             {battle_info.select().character === character.character ?
             character.action_list.map((action) => (
-            <button key={action[2]} onClick={ActionSelect({
+            <button key={action[2]}  className='btn btn-dark' onClick={ActionSelect({
                 'action': action[0],
                 'atk_type': action[1]
             })}>
@@ -133,7 +133,7 @@ return (
 
         <div className='col'>
         {enemy.map((character) => (
-            <button onClick={EnemySelect(character)}>{character.character}</button>
+            <button className='btn btn-dark' onClick={EnemySelect(character)}>{character.character}</button>
         ))}
         </div>
         </div>
@@ -159,10 +159,7 @@ return (
             <div id='turn-order' className='col-sm-3 list-group px-0'>
         <div className='h-100 d-inline-block bg-white'>
             <div className="list-group-item text-bg-dark">Battle Information</div>
-            <div style={{
-        height: '150px',
-        overflow: 'auto'
-    }}>
+            <div>
                     <div className="list-group-item list-group-item-action">
                 Current Sp: {battle_info.sp_counter.sp}/5
                     </div>
@@ -181,7 +178,7 @@ AV until next Cycle: {battle_info.turn_counter.current_cycle_AV}
         <div className='h-100 d-inline-block bg-white'>
             <div className="list-group-item text-bg-dark">Battle History</div>
             <div style={{
-        height: '150px',
+        height: '192px',
         overflow: 'auto'
     }}>
                 {history.map((instance,index) => (
@@ -201,7 +198,7 @@ AV until next Cycle: {battle_info.turn_counter.current_cycle_AV}
 </div>
             </div>
     <div className='mx-0 px-0 border border-dark rounded bg-dark-subtle h-100 d-inline-block w-100 mt-4 rounded'>
-    <div className='row mx-0 mb-2' style={{height: '260px'}}>
+    <div className='row mx-0 mb-0' style={{height: '260px'}}>
  <div id='character-list' className='col-sm-3 list-group'>
         <div className='h-100 d-inline-block bg-white'>
             <div className="list-group-item text-bg-dark">All units</div>
@@ -215,14 +212,25 @@ AV until next Cycle: {battle_info.turn_counter.current_cycle_AV}
                     <div className='col-sm-2 align-items-center d-flex border-end' style={{height:'100%'}}>
                         <img className='img-fluid' src={info.img}/>
                         </div>
-                    <div className='col-sm'>
-                        <p>Element: {info.element}</p>
-                        <p>HP:{info.hp}</p>
-                        <p>ATK:{info.atk}</p>
-                        <p>SPD:{info.base_spd}</p>
-                        <p>Energy:{info.cur_en}/{info.max_en}</p>
-                        <p>Total Dmg Done: {info.total_dmg} </p>
-                    </div>
+                    <div id='char-info' className='col list-group px-0'>
+        <div className='h-100 d-inline-block bg-white'>
+            <div className="list-group-item text-bg-dark">{info.character}'s Stats</div>
+            <div style={{
+        height: '212px',
+        overflow: 'auto'
+    }}>
+        <div className="list-group-item list-group-item-action">Total Dmg Done: {info.total_dmg}</div>
+        <div className="list-group-item list-group-item-action" >Element: {info.element}</div>
+        <div className="list-group-item list-group-item-action" >HP: {info.hp}</div>
+        <div className="list-group-item list-group-item-action" >ATK: {info.atk}</div>
+        <div className="list-group-item list-group-item-action" >SPD: {info.base_spd}</div>
+        <div className="list-group-item list-group-item-action" >Energy: {info.cur_en}</div>
+
+                </div>
+
+                </div>
+                </div>
+
                     </>
                     : null}
                     { info.unit_type === 'enemy' ?
@@ -230,17 +238,27 @@ AV until next Cycle: {battle_info.turn_counter.current_cycle_AV}
                     <div className='col-sm-2 align-items-center d-flex border-end' style={{height:'100%'}}>
                         <img className='img-fluid' src={info.img}/>
                         </div>
-                    <div className='col-sm'>
-                        <p>Weakness: {info.weakness.map((item) => (
+                    <div id='enemy-info' className='col list-group px-0'>
+        <div className='h-100 d-inline-block bg-white'>
+            <div className="list-group-item text-bg-dark">{info.character}'s Stats</div>
+            <div style={{
+        height: '212px',
+        overflow: 'auto'
+    }}>
+        <div className="list-group-item list-group-item-action">Weakness: {info.weakness.map((item) => (
                             <>
                             {item},
-                            </>
-                        ))}</p>
-                        <p>Toughness:{info.toughness}</p>
-                        <p>DEF:{info.def}</p>
-                        <p>SPD:{info.base_spd}</p>
+                            </>))}</div>
+        <div className="list-group-item list-group-item-action" >Toughness:{info.toughness}</div>
+        <div className="list-group-item list-group-item-action" >DEF:{info.def}</div>
+        <div className="list-group-item list-group-item-action" >SPD:{info.base_spd}</div>
 
-                    </div>
+
+
+                </div>
+
+                </div>
+                </div>
                     </>
                     : null}
             </div>
