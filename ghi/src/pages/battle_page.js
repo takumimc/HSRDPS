@@ -88,31 +88,34 @@ const Battle = () => {
 
     }
 return (
-    <>
-    <div className='container px-0'>
-        <div className='row'>
+    <div className='p-3 mb-0 bg-dark text-emphasis-dark h-100 vw-100'>
+    <div className='container mx-auto px-0'>
+    <div className='mx-0 px-0 border border-dark rounded bg-dark-subtle d-inline-block w-100'>
+        <div className='row mt-3 mb-3' style={{height:'500px'}}>
         {party.map((character, index) =>
         {if(battle_info.select().character === character.character)
         return(
             <div className='col text-center'>
-            <div  key={character.character + index}>{character.character}</div>
-            <img src={character.img} />
+            <div  key={character.character + index} ><p className='text-center fw-bold fs-5'>{character.character}</p></div>
+            <img src={character.img} className='mx-auto d-block' style={{width:'60%'}} />
             </div>
         )})}
-        <div className='col' style={{height:'500px'}}>
+
+        <div className='col'>
         {targetRef.current['target'] === null ?
         <div className='text-center'>
-            <p>Select target</p>
-          <img src={silhouette} className='img-fluid' style={{maxHeight: '300px'}}/>
+            <p className='text-center fw-bold fs-5'>Select target</p>
+          <img src={silhouette} className='mx-auto d-block' style={{width: '60%'}}/>
         </div>
         : <div className='text-center'>
-            <p>{focus.character}</p>
-            <img src={focus.img} className='img-fluid' style={{maxHeight: '431px'}} />
+            <p className='text-center fw-bold fs-5'>{focus.character}</p>
+            <img src={focus.img} className='mx-auto d-block' style={{width:'65%'}} />
         </div>
         }
     </div>
     </div>
-        <div className='row text-center mx-0'>
+
+        <div className='row text-center mx-0 mb-3'>
             {party.map((character) =>{
                 if(battle_info.select().character === character.character)
                 return (
@@ -134,44 +137,82 @@ return (
         ))}
         </div>
         </div>
-        <div className='row mx-auto'>
-    <div className='col-sm-2 px-0' style={{
-        height: '200px',
-        overflow: 'auto'
-    }}>
-        Turn Order
-        {battle_info.turn_counter.turn_list.map((char,index) => (
-            <p className='mb-1 px-0'key={index}>{Object.keys(char)[0]}:{Object.values(char)[0]}</p>
-        ))}
-        <button onClick={TakeAction}>Take action</button>
-    </div>
-    <div className='col-sm-2'>
-        Battle Info
-        <p className='mb-1 px-0'>Current Sp: {battle_info.sp_counter.sp}/5 </p>
-        <p className='mb-1 px-0'>Cycle: {battle_info.turn_counter.cycle}</p>
-        <p className='mb-1 px-0'>AV until next Cycle: {battle_info.turn_counter.current_cycle_AV}</p>
-    </div>
-    <div className='col'style={{
-        height: '200px',
-        overflow: 'auto'
-    }}>
-        {history.map((instance,index) => (
-            (instance['character'] === 'enemy') ?
-            <p className='mb-1 px-0' key={index}>Enemy turn taken</p>:
-            <p className='mb-1 px-0' key={index}>{instance['character'].character} did {instance['dmg']} to {instance['target']}</p>
-        ))}
-    </div>
         </div>
-    <div className='row mx-0'>
+
+        <div className='mx-0 px-0 border border-dark rounded bg-dark-subtle h-100 d-inline-block w-100 mt-4'>
+        <div className='row mx-auto'>
+            <div id='turn-order' className='col-sm-3 list-group px-0'>
+        <div className='h-100 d-inline-block bg-white'>
+            <div className="list-group-item text-bg-dark">Turn Order</div>
+            <div style={{
+        height: '150px',
+        overflow: 'auto'
+    }}>
+                {battle_info.turn_counter.turn_list.map((character,index) => (
+                    <div className="list-group-item list-group-item-action" key={index}>{Object.keys(character)[0]}: {Object.values(character)[0]}</div>
+                ))}
+                </div>
+                <button className="list-group-item list-group-item-action list-group-item-success" onClick={TakeAction}>Take action</button>
+                </div>
+                </div>
+
+            <div id='turn-order' className='col-sm-3 list-group px-0'>
+        <div className='h-100 d-inline-block bg-white'>
+            <div className="list-group-item text-bg-dark">Battle Information</div>
+            <div style={{
+        height: '150px',
+        overflow: 'auto'
+    }}>
+                    <div className="list-group-item list-group-item-action">
+                Current Sp: {battle_info.sp_counter.sp}/5
+                    </div>
+                    <div className="list-group-item list-group-item-action">
+                Cycle: {battle_info.turn_counter.cycle}
+                    </div>
+                    <div className="list-group-item list-group-item-action">
+AV until next Cycle: {battle_info.turn_counter.current_cycle_AV}
+                    </div>
+                </div>
+                </div>
+                </div>
+
+
+            <div id='turn-order' className='col list-group px-0'>
+        <div className='h-100 d-inline-block bg-white'>
+            <div className="list-group-item text-bg-dark">Battle History</div>
+            <div style={{
+        height: '150px',
+        overflow: 'auto'
+    }}>
+                {history.map((instance,index) => (
+                    (instance['character'] === 'enemy')?
+                                       <div className="list-group-item list-group-item-action" key={index}>
+                        Enemy turn taken</div> :
+                    <div className="list-group-item list-group-item-action" key={index}>
+                        {instance['character'].character} did {instance['dmg']} to {instance['target']}</div>
+
+                ))}
+
+                </div>
+
+                </div>
+                </div>
+
+</div>
+            </div>
+    <div className='mx-0 px-0 border border-dark rounded bg-dark-subtle h-100 d-inline-block w-100 mt-4 rounded'>
+    <div className='row mx-0 mb-2' style={{height: '260px'}}>
  <div id='character-list' className='col-sm-3 list-group'>
+        <div className='h-100 d-inline-block bg-white'>
             <div className="list-group-item text-bg-dark">All units</div>
                 {battle_info.all_units.map(character => (
                     <button type='button' className="list-group-item list-group-item-action" onClick={InfoSelect(character)} key={character.character}>{character.character}</button>
                 ))}
                 </div>
+                </div>
                     { info.unit_type === 'player' ?
                     <>
-                    <div className='col-sm-2' style={{height:'100%'}}>
+                    <div className='col-sm-2 align-items-center d-flex border-end' style={{height:'100%'}}>
                         <img className='img-fluid' src={info.img}/>
                         </div>
                     <div className='col-sm'>
@@ -186,7 +227,7 @@ return (
                     : null}
                     { info.unit_type === 'enemy' ?
                     <>
-                    <div className='col-sm-2' style={{height:'100%'}}>
+                    <div className='col-sm-2 align-items-center d-flex border-end' style={{height:'100%'}}>
                         <img className='img-fluid' src={info.img}/>
                         </div>
                     <div className='col-sm'>
@@ -202,13 +243,10 @@ return (
                     </div>
                     </>
                     : null}
+            </div>
+            </div>
+        </div>
     </div>
-
-
-</div>
-
-
-    </>
 )
 }
 

@@ -38,7 +38,7 @@ const PartySelect = () =>{
     }
     return (
         <>
-        <div className='p-3 mb-2 bg-dark text-emphasis-dark vh-100 vw-100'>
+        <div className='p-3 mb-0 bg-dark text-emphasis-dark vh-100 vw-100'>
             Current Party:
             <div className='container mx-auto px-0'style={{height: '285px'}}>
                 <div className='mx-0 px-0 border border-dark rounded bg-dark-subtle h-100 d-inline-block w-100'>
@@ -52,9 +52,9 @@ const PartySelect = () =>{
                     </div>
                 ))}
 
-                {party.length < 1 ?<div className='col-sm-2 d-inline w-25 h-100 px-0 border-end'>
+                {party.length < 1 ?<div className='col-sm-2 d-inline w-25 h-100 px-0'>
                     <p className='text-center fw-bold fs-5'> None</p>
-                    <img src={silhouette} className='img-fluid'/>
+                    <img src={silhouette} className='mx-auto d-block' style={{width: '60%'}}/>
                 </div>
                  : null}
                 {party.length < 2 ?<div className='col-sm-2 d-inline w-25 h-100 px-0'>
@@ -82,7 +82,7 @@ const PartySelect = () =>{
         height: '298px',
         overflow: 'auto'
     }}>
-                <div className='h-100 d-inline-block bg-white '>
+                <div className='h-100 d-inline-block bg-white'>
             <div className="list-group-item text-bg-dark">Select character</div>
                 {characters.map(character => (
                     <button type='button' className="list-group-item list-group-item-action" key={character.character} onClick={selectPartyClick(character)}>{character.character}</button>

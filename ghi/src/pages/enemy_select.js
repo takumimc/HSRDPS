@@ -35,11 +35,12 @@ const EnemySelect= () =>{
     }
     return (
         <>
-        <div className='p-3 mb-2 bg-dark text-emphasis-dark vh-100 vw-100'>
+        <div className='p-3 mb-0 bg-dark text-emphasis-dark vh-100 vw-100'>
             Current Enemies:
             <div className='container mx-auto px-0'style={{height: '285px'}}>
                 <div className='mx-0 px-0 border border-dark rounded bg-dark-subtle h-100 d-inline-block w-100'>
                 <div className='row mx-0 px-0'>
+                    <div className='mt-auto mb-auto'>
                 {enemy.map((character, index) => (
                     <div className='col-sm-2 mx-auto' key={index}>
                         <p className='text-center fw-bold fs-5' key={index + 'p'}>{character.character}</p>
@@ -73,6 +74,7 @@ const EnemySelect= () =>{
                 </div>
                  : null} */}
 
+            </div>
             </div>
             </div>
             </div>
