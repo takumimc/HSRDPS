@@ -92,14 +92,13 @@ return (
     <div className='container mx-auto px-0'>
     <div className='mx-0 px-0 border border-dark rounded bg-dark-subtle d-inline-block w-100'>
         <div className='row mt-3 mb-3' style={{height:'500px'}}>
-        {party.map((character, index) =>
-        {if(battle_info.select().character === character.character)
-        return(
+        {party.filter(character => battle_info.select().character === character.character).map((character, index) => {
+            return(
             <div className='col text-center'>
             <div  key={character.character + index} ><p className='text-center fw-bold fs-5'>{character.character}</p></div>
             <img src={character.img} className='mx-auto d-block' alt={character.character} style={{width:'60%'}} />
             </div>
-        )})}
+            )})}
 
         <div className='col'>
         {targetRef.current['target'] === null ?
@@ -116,8 +115,7 @@ return (
     </div>
 
         <div className='row text-center mx-0 mb-3'>
-            {party.map((character) =>{
-                if(battle_info.select().character === character.character)
+            {party.filter(character => battle_info.select().character === character.character).map((character) =>{
                 return (
             <div className='col'>
             {battle_info.select().character === character.character ?
@@ -127,9 +125,9 @@ return (
                 'atk_type': action[1]
             })}>
             {action[2]}</button>
-            )): null}</div>
+            )): <div></div>}</div>
                     )
-            })}
+})}
 
         <div className='col'>
         {enemy.map((character) => (
