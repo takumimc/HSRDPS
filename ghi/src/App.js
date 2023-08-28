@@ -5,9 +5,10 @@ import PartySelect from "./pages/party_select";
 import EnemySelect from "./pages/enemy_select";
 import UnitContextProvider from "./utils/UnitsContext";
 function App() {
-
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter basename={basename}>
     <UnitContextProvider>
         <Routes>
           <Route path='/'>
