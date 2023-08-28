@@ -7,7 +7,7 @@ import UnitContextProvider from "./utils/UnitsContext";
 function App() {
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
     <UnitContextProvider>
         <Routes>
           <Route path='/'>
