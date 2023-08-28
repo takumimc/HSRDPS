@@ -1,5 +1,4 @@
 import enemies from "../characters/enemy_index.mjs";
-import characters from "../characters/party_index.mjs";
 import { useContext, useState } from "react";
 import { UnitContext } from "../utils/UnitsContext";
 import { useNavigate } from "react-router-dom";
@@ -44,13 +43,13 @@ const EnemySelect= () =>{
                 {enemy.map((character, index) => (
                     <div className='col-sm-2 mx-auto' key={index}>
                         <p className='text-center fw-bold fs-5' key={index + 'p'}>{character.character}</p>
-                        <img src={character.img} className='img-fluid' key={index+ 'img'}/>
+                        <img src={character.img} className='img-fluid' alt='img' key={index+ 'img'}/>
                     </div>
                 ))}
 
                 {enemy.length < 1 ?<div className='col-sm-2 mx-auto'>
                     <p className='text-center fw-bold fs-5'> None</p>
-                    <img src={silhouette} className='img-fluid'/>
+                    <img src={silhouette} alt='placeholder' className='img-fluid'/>
                 </div>
                  : null}
                 {/* {enemy.length < 2 ?<div className='col-sm-2 mx-auto'>
@@ -98,7 +97,7 @@ const EnemySelect= () =>{
                     { selectP ?
                     <>
                                                             <div className='col-sm-2 align-items-center d-flex border-end px-0' style={{height:'100%'}}>
-                        <img className='img-fluid' src={selectP.img}/>
+                        <img className='img-fluid' alt='img' src={selectP.img}/>
                         </div>
                     <div id='char-info' className='col list-group px-0'>
         <div className='h-100 d-inline-block bg-white'>

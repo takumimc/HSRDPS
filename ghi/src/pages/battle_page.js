@@ -4,8 +4,8 @@ import { useContext, useRef, useState } from "react";
 import { silhouette } from "../assets/index.mjs";
 const Battle = () => {
 
-    const {party, setParty} = useContext(UnitContext)
-    const {enemy, setEnemy} = useContext(UnitContext)
+    const {party} = useContext(UnitContext)
+    const {enemy} = useContext(UnitContext)
     const [history, setHistory] = useState([])
     const targetRef = useRef({
         'action': null,
@@ -97,7 +97,7 @@ return (
         return(
             <div className='col text-center'>
             <div  key={character.character + index} ><p className='text-center fw-bold fs-5'>{character.character}</p></div>
-            <img src={character.img} className='mx-auto d-block' style={{width:'60%'}} />
+            <img src={character.img} className='mx-auto d-block' alt={character.character} style={{width:'60%'}} />
             </div>
         )})}
 
@@ -105,11 +105,11 @@ return (
         {targetRef.current['target'] === null ?
         <div className='text-center'>
             <p className='text-center fw-bold fs-5'>Select target</p>
-          <img src={silhouette} className='mx-auto d-block' style={{width: '60%'}}/>
+          <img src={silhouette} className='mx-auto d-block' alt='placeholder' style={{width: '60%'}}/>
         </div>
         : <div className='text-center'>
             <p className='text-center fw-bold fs-5'>{focus.character}</p>
-            <img src={focus.img} className='mx-auto d-block' style={{width:'65%'}} />
+            <img src={focus.img} className='mx-auto d-block' alt={focus.character} style={{width:'65%'}} />
         </div>
         }
     </div>
@@ -210,7 +210,7 @@ AV until next Cycle: {battle_info.turn_counter.current_cycle_AV}
                     { info.unit_type === 'player' ?
                     <>
                     <div className='col-sm-2 align-items-center d-flex border-end' style={{height:'100%'}}>
-                        <img className='img-fluid' src={info.img}/>
+                        <img className='img-fluid' alt='img' src={info.img}/>
                         </div>
                     <div id='char-info' className='col list-group px-0'>
         <div className='h-100 d-inline-block bg-white'>
@@ -236,7 +236,7 @@ AV until next Cycle: {battle_info.turn_counter.current_cycle_AV}
                     { info.unit_type === 'enemy' ?
                     <>
                     <div className='col-sm-2 align-items-center d-flex border-end' style={{height:'100%'}}>
-                        <img className='img-fluid' src={info.img}/>
+                        <img className='img-fluid' alt='img' src={info.img}/>
                         </div>
                     <div id='enemy-info' className='col list-group px-0'>
         <div className='h-100 d-inline-block bg-white'>

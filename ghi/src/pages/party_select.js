@@ -1,10 +1,10 @@
-import enemies from "../characters/enemy_index.mjs";
+
 import characters from "../characters/party_index.mjs";
 import { useContext, useState } from "react";
 import { UnitContext } from "../utils/UnitsContext";
 import { useNavigate } from "react-router-dom";
 import { silhouette } from "../assets/index.mjs";
-import BaseHead from "../relics/base_head.mjs";
+// import BaseHead from "../relics/base_head.mjs";
 
 const PartySelect = () =>{
     const nav = useNavigate()
@@ -14,11 +14,11 @@ const PartySelect = () =>{
 
     const [selectP, setSelectP] = useState(null)
 
-    const [selectGear, setSelectGear] = useState(null)
+    // const [selectGear, setSelectGear] = useState(null)
 
-    const selectGearClick = (select) => () => {
-        setSelectGear(select)
-    }
+    // const selectGearClick = (select) => () => {
+    //     setSelectGear(select)
+    // }
     const addPartyClick = (select) => () => {
         if(party.length === 4){
             alert('Maximum party size reached')
@@ -51,29 +51,29 @@ const PartySelect = () =>{
                     <div className='col-sm-2 d-inline w-25 h-100 px-0' key={index}>
                         <div className='mx-auto'>
                         <p className='text-center fw-bold fs-5'>{character.character}</p>
-                        <img src={character.img} className='mx-auto d-block' style={{width:'60%'}}/>
+                        <img src={character.img} alt='character img' className='mx-auto d-block' style={{width:'60%'}}/>
                         </div>
                     </div>
                 ))}
 
                 {party.length < 1 ?<div className='col-sm-2 d-inline w-25 h-100 px-0'>
                     <p className='text-center fw-bold fs-5'> None</p>
-                    <img src={silhouette} className='mx-auto d-block' style={{width: '60%'}}/>
+                    <img src={silhouette} alt='placeholder' className='mx-auto d-block' style={{width: '60%'}}/>
                 </div>
                  : null}
                 {party.length < 2 ?<div className='col-sm-2 d-inline w-25 h-100 px-0'>
                     <p className='text-center fw-bold fs-5'> None</p>
-                    <img src={silhouette} className='mx-auto d-block' style={{width: '60%'}}/>
+                    <img src={silhouette} alt='placeholder' className='mx-auto d-block' style={{width: '60%'}}/>
                 </div>
                  : null}
                 {party.length < 3 ?<div className='col-sm-2 d-inline w-25 h-100 px-0'>
                     <p className='text-center fw-bold fs-5'> None</p>
-                    <img src={silhouette} className='mx-auto d-block' style={{width: '60%'}}/>
+                    <img src={silhouette} alt='placeholder' className='mx-auto d-block' style={{width: '60%'}}/>
                 </div>
                  : null}
                 {party.length < 4 ?<div className='col-sm-2 d-inline w-25 h-100 px-0'>
                     <p className='text-center fw-bold fs-5'> None</p>
-                    <img src={silhouette} className='mx-auto d-block' style={{width: '60%'}}/>
+                    <img src={silhouette} alt='placeholder' className='mx-auto d-block' style={{width: '60%'}}/>
                 </div>
                  : null}
 </div>
@@ -97,7 +97,7 @@ const PartySelect = () =>{
                     { selectP ?
                     <>
                                         <div className='col-sm-2 align-items-center d-flex border-end px-0' style={{height:'100%'}}>
-                        <img className='img-fluid' src={selectP.img}/>
+                        <img className='img-fluid' alt='placeholder' src={selectP.img}/>
                         </div>
                     <div id='char-info' className='col list-group px-0'>
         <div className='h-100 d-inline-block bg-white'>
