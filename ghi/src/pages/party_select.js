@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { UnitContext } from "../utils/UnitsContext";
 import { useNavigate } from "react-router-dom";
 import { silhouette } from "../assets/index.mjs";
-
+import BaseHead from "../relics/base_head.mjs";
 
 const PartySelect = () =>{
     const nav = useNavigate()
@@ -14,7 +14,11 @@ const PartySelect = () =>{
 
     const [selectP, setSelectP] = useState(null)
 
+    const [selectGear, setSelectGear] = useState(null)
 
+    const selectGearClick = (select) => () => {
+        setSelectGear(select)
+    }
     const addPartyClick = (select) => () => {
         if(party.length === 4){
             alert('Maximum party size reached')
@@ -117,6 +121,97 @@ const PartySelect = () =>{
                         </div>}
             </div>
             </div>
+            {/* <div className='container mx-auto px-0 mt-5'>
+            <div className='row mx-auto border border-dark rounded bg-dark-subtle' style={{height:'100%'}}>
+            <div id='relictype' className='col-sm-2 list-group mx-0 px-0'>
+                <div className='h-100 d-inline-block bg-white'>
+            <div className="list-group-item text-bg-dark">Select Relic</div>
+                    <button type='button' className="list-group-item list-group-item-action"
+                        onClick={selectGearClick('head')}>
+                        Head
+                    </button>
+                    <button type='button' className="list-group-item list-group-item-action"
+                    onClick={selectGearClick('body')}>
+                        Body
+                    </button>
+                    <button type='button' className="list-group-item list-group-item-action"
+                    onClick={selectGearClick('hands')}>
+                        Hands
+                    </button>
+                    <button type='button' className="list-group-item list-group-item-action"
+                    onClick={selectGearClick('feet')}>
+                        Feet
+                    </button>
+                </div>
+                <button className="list-group-item list-group-item-action list-group-item-success" onClick={ContinueClick}>Add to character</button>
+                </div>
+            <div id='mainstat' className='col-sm-1 list-group mx-0 px-0'>
+                <div className='h-100 d-inline-block bg-white'>
+                    <div className="list-group-item text-bg-dark">Main Stat</div>
+            {selectGear == 'head' ?
+            <><form>
+                    <button type='button' className="list-group-item list-group-item-action">
+                        HP
+                    </button>
+                    </form>
+                    </>
+                : null}
+                </div>
+                </div>
+            <div id='mainstat' className='col-sm-1 list-group mx-0 px-0'>
+                <div className='h-100 d-inline-block bg-white'>
+                    <div className="list-group-item text-bg-dark">Sub Stat</div>
+            {selectGear == 'head' ?
+            <><form>
+                    <button type='button' className="list-group-item list-group-item-action">
+                        HP
+                    </button>
+                    </form>
+                    </>
+                : null}
+                </div>
+                </div>
+            <div id='mainstat' className='col-sm-1 list-group mx-0 px-0'>
+                <div className='h-100 d-inline-block bg-white'>
+                    <div className="list-group-item text-bg-dark">Roll 1</div>
+            {selectGear == 'head' ?
+            <><form>
+                    <button type='button' className="list-group-item list-group-item-action">
+                        HP
+                    </button>
+                    </form>
+                    </>
+                : null}
+                </div>
+                </div>
+            <div id='mainstat' className='col-sm-1 list-group mx-0 px-0'>
+                <div className='h-100 d-inline-block bg-white'>
+                    <div className="list-group-item text-bg-dark">Roll 2</div>
+            {selectGear == 'head' ?
+            <><form>
+                    <button type='button' className="list-group-item list-group-item-action">
+                        HP
+                    </button>
+                    </form>
+                    </>
+                : null}
+                </div>
+                </div>
+            <div id='mainstat' className='col-sm-1 list-group mx-0 px-0'>
+                <div className='h-100 d-inline-block bg-white'>
+                    <div className="list-group-item text-bg-dark">Roll 3</div>
+            {selectGear == 'head' ?
+            <><form>
+                    <button type='button' className="list-group-item list-group-item-action">
+                        HP
+                    </button>
+                    </form>
+                    </>
+                : null}
+                </div>
+                </div>
+            </div>
+            </div> */}
         </div>
         </>
     )
