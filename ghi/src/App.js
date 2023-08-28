@@ -18,9 +18,6 @@ function App() {
         </Routes>
       </UnitContextProvider>
     </BrowserRouter>
-      //   <UnitContextProvider>
-      //     <PartySelect/>
-      // </UnitContextProvider>
   );
 }
 
